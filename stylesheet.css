@@ -15,6 +15,7 @@ table {
 	font-size:20px;
 	text-align: center;
 	border-bottom: none;
+	color: #3b5998;
 	
 }
 
@@ -24,6 +25,7 @@ th {
 	text-align: left;
 	font-weight: bold;
 	border-bottom: black 1px solid;
+	color: #3b5998;
 	
 }
 	
@@ -39,6 +41,14 @@ th {
 #bord{
 	border-left: black 1px solid;
 	padding-left: 10px
+}
+
+.rowcolor1{
+	background-color: #dfe3ee;
+}
+
+.rowcolor2{
+	background-color: #8b9dc3;
 }
 	
 tr {
