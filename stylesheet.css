@@ -1,0 +1,21 @@
+body {
+	font-family: Verdana;
+	font-weight: bold;
+	margin-left: 300px
+}
+
+
+#thead {
+	font-size:20px;
+	text-align: center;
+	border-bottom: black 1px solid
+}
+
+th {
+	text-align: left;
+	font-weight: bold;
+}
+
+tr {
+	padding-left: 10px;
+}
