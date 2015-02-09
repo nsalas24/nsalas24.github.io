@@ -5,21 +5,26 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="hw2_script.js"></script>
 		<link type="text/css" rel="stylesheet" href="hw2_stylesheet.css"/>
+		<title>Noah Salas: - IE590 HW2</title>
 	</head>
 	<body>
+		<h2>Applicant Table<h2>
 		<table id=hw2table>
 			<tbody>
 				<tr>
 					<th>Name</th>
 					<th>GPA</th>
-					<th>GRE_V</th>
-					<th>GRE_Q</th>
+					<th>GRE Verbal Score</th>
+					<th>GRE Quant Score</th>
 					<th>Essay</th>
-					<th>Recom</th>
+					<th>Recommenders</th>
 				</tr>
 			<tbody>
 		</table>
-		<input id="filterBox" placeholder="Type To Filter"><br/>
+		<span style="display:inline-block">
+			<label for="filterBox">Filter the table according to your interests! Please note that this filter applies to all rows except the header, and is case sensitive.</label>
+			<input id="filterBox" placeholder="Type To Filter!"><br/>
+		</span>
 	</body>
 </html>
 	

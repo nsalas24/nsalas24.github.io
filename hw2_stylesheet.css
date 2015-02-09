@@ -1,26 +1,56 @@
+body {
+font-family: Verdana;
+}
+h2 {
+text-align: center
+}
 #hw2table {
 padding: 20px;
 margin: auto;
-border: 0px;
 border-spacing: 10px;
-border-collapse: collapse;
+border-collapse:collapse;
+border-radius:6px;
 }
 th {
 text-align: center;
 font-weight: bold;
-border-bottom: black 1px solid;
-width: 150px;    
+width: 150px;
+border-top: none;
+padding: 5px;
+background-color: #bbbbbb;
 }
 td {
-padding: 5px 0px 0px 5px;
-width: 150px;
+width: 200px;
 text-align: center;
+border-top:solid black 1px;
+padding: 5px;
+background-color: #f0c75e;
 }
-
-
+span{
+padding-top: 50px;
+}
 #filterBox {
-position: relative;
-width:150px;
-top: 50px;
-right: -325px;
+position: inline;
+width:175px;
+box-shadow: 0px 0px 0px 0px #bbbbbb;
 }
+label {
+font-size: 14px;
+}
+/*adding border radius*/
+td:first-child, th:first-child {
+     border-left: none;
+}
+th:first-child {
+border-radius: 10px 0 0 0; 
+}
+th:last-child {
+border-radius: 0 10px 0 0; 
+}
+tr:last-child td:first-child {
+border-radius: 0 0 0 10px; 
+}
+tr:last-child td:last-child {
+border-radius: 0 0 10px 0; 
+}
+
