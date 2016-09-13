@@ -1,0 +1,1198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Noah Salas</title>
+    <description>Noah Salas&#39; personal webpage.
+</description>
+    <link>http://nsalas24.github.io/</link>
+    <atom:link href="http://nsalas24.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 13 Sep 2016 13:09:54 -0500</pubDate>
+    <lastBuildDate>Tue, 13 Sep 2016 13:09:54 -0500</lastBuildDate>
+    <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>Premier League Player Ratings Using D3</title>
+        <description>&lt;style&gt;
+
+#chart {
+  background: #fff;
+  font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+  display: block;
+  margin: auto;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+text {
+  pointer-events: none;
+}
+
+.grandparent text {
+  font-weight: bold;
+}
+
+rect {
+  fill: none;
+  stroke: #fff;
+}
+
+rect.parent,
+.grandparent rect {
+  stroke-width: 2px;
+}
+
+rect.parent {
+    pointer-events: none;
+}
+
+.grandparent rect {
+  fill: orange;
+}
+
+.grandparent:hover rect {
+  fill: #ee9700;
+}
+
+.children rect.parent,
+.grandparent rect {
+  cursor: pointer;
+}
+
+.children rect.parent {
+  fill: #bbb;
+  fill-opacity: .1;
+}
+
+.children:hover rect.child {
+  fill: #bbb;
+}
+
+&lt;/style&gt;
+
+&lt;div id=&quot;chart&quot;&gt;&lt;/div&gt;
+
+&lt;script src=&quot;http://code.jquery.com/jquery-1.7.2.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;http://d3js.org/d3.v3.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;
+
+
+window.addEventListener(&#39;message&#39;, function(e) {
+    var opts = e.data.opts,
+        data = e.data.data;
+
+    return main(opts, data);
+});
+
+var defaults = {
+    margin: {top: 24, right: 0, bottom: 0, left: 0},
+    rootname: &quot;TOP&quot;,
+    format: &quot;,d&quot;,
+    title: &quot;&quot;,
+    width: 1100,
+    height: 600
+};
+
+function main(o, data) {
+  var root,
+      opts = $.extend(true, {}, defaults, o),
+      formatNumber = d3.format(&quot;.2f&quot;),
+      rname = opts.rootname,
+      margin = opts.margin,
+      theight = 36 + 16;
+
+  $(&#39;#chart&#39;).width(opts.width).height(opts.height);
+  var width = opts.width - margin.left - margin.right,
+      height = opts.height - margin.top - margin.bottom - theight,
+      transitioning;
+  
+  var color = d3.scale.ordinal().range([&#39;#ff0000&#39;,&#39;#cc0000&#39;,&#39;#800000&#39;,&#39;#0000ff&#39;,&#39;#ff1a1a&#39;,&#39;#4747d1&#39;,&#39;#ff8000&#39;,&#39;#1a1aff&#39;,&#39;#ff1a1a&#39;,&#39;#99c2ff&#39;,&#39;#ff0000&#39;,&#39;#ff1a1a&#39;,&#39;#cc0000&#39;,&#39;#ff0000&#39;,&#39;#ff0000&#39;,&#39;#e0e0d1&#39;,&#39;#e0e0d1&#39;,&#39;#ffff00&#39;,&#39;#000080&#39;,&#39;#800000&#39;]).domain([&quot;Arsenal&quot;,&quot;Bournemouth&quot;,&quot;Burnley&quot;,&quot;Chelsea&quot;,&quot;Crystal Palace&quot;,&quot;Everton&quot;,&quot;Hull City&quot;,&quot;Leicester&quot;,&quot;Liverpool&quot;,&quot;Manchester City&quot;,&quot;Manchester United&quot;,&quot;Middlesbrough&quot;,&quot;Southampton&quot;,&quot;Stoke City&quot;,&quot;Sunderland&quot;,&quot;Swansea City&quot;,&quot;Tottenham&quot;,&quot;Watford&quot;,&quot;West Bromwich Albion&quot;,&quot;West Ham&quot;])
+  
+  var x = d3.scale.linear()
+      .domain([0, width])
+      .range([0, width]);
+  
+  var y = d3.scale.linear()
+      .domain([0, height])
+      .range([0, height]);
+  
+  var treemap = d3.layout.treemap()
+      .children(function(d, depth) { return depth ? null : d._children; })
+      .sort(function(a, b) { return a.value - b.value; })
+      .ratio(height / width * 0.5 * (1 + Math.sqrt(5)))
+      .round(false);
+  
+  var svg = d3.select(&quot;#chart&quot;).append(&quot;svg&quot;)
+      .attr(&quot;width&quot;, width + margin.left + margin.right)
+      .attr(&quot;height&quot;, height + margin.bottom + margin.top)
+      .style(&quot;margin-left&quot;, -margin.left + &quot;px&quot;)
+      .style(&quot;margin.right&quot;, -margin.right + &quot;px&quot;)
+    .append(&quot;g&quot;)
+      .attr(&quot;transform&quot;, &quot;translate(&quot; + margin.left + &quot;,&quot; + margin.top + &quot;)&quot;)
+      .style(&quot;shape-rendering&quot;, &quot;crispEdges&quot;);
+  
+  var grandparent = svg.append(&quot;g&quot;)
+      .attr(&quot;class&quot;, &quot;grandparent&quot;);
+  
+  grandparent.append(&quot;rect&quot;)
+      .attr(&quot;y&quot;, -margin.top)
+      .attr(&quot;width&quot;, width)
+      .attr(&quot;height&quot;, margin.top);
+  
+  grandparent.append(&quot;text&quot;)
+      .attr(&quot;x&quot;, 6)
+      .attr(&quot;y&quot;, 6 - margin.top)
+      .attr(&quot;dy&quot;, &quot;.75em&quot;);
+
+  if (opts.title) {
+    $(&quot;#chart&quot;).prepend(&quot;&lt;p class=&#39;title&#39;&gt;&quot; + opts.title + &quot;&lt;/p&gt;&quot;);
+  }
+  if (data instanceof Array) {
+    root = { key: rname, values: data };
+  } else {
+    root = data;
+  }
+    
+  initialize(root);
+  accumulate(root);
+  layout(root);
+  console.log(root);
+  display(root);
+
+  //if (window.parent !== window) {
+    //var myheight = document.documentElement.scrollHeight || document.body.scrollHeight;
+    //window.parent.postMessage({height: myheight}, &#39;*&#39;);
+  //}
+
+  function initialize(root) {
+    root.x = root.y = 0;
+    root.dx = width;
+    root.dy = height;
+    root.depth = 0;
+  }
+
+  // Aggregate the values for internal nodes. This is normally done by the
+  // treemap layout, but not here because of our custom implementation.
+  // We also take a snapshot of the original children (_children) to avoid
+  // the children being overwritten when when layout is computed.
+  function accumulate(d) {
+    return (d._children = d.values)
+        ? d.value = d.values.reduce(function(p, v) { return p + accumulate(v); }, 0)
+        : d.value;
+  }
+
+  // Compute the treemap layout recursively such that each group of siblings
+  // uses the same size (1×1) rather than the dimensions of the parent cell.
+  // This optimizes the layout for the current zoom state. Note that a wrapper
+  // object is created for the parent node for each group of siblings so that
+  // the parent’s dimensions are not discarded as we recurse. Since each group
+  // of sibling was laid out in 1×1, we must rescale to fit using absolute
+  // coordinates. This lets us use a viewport to zoom.
+  function layout(d) {
+    if (d._children) {
+      treemap.nodes({_children: d._children});
+      d._children.forEach(function(c) {
+        c.x = d.x + c.x * d.dx;
+        c.y = d.y + c.y * d.dy;
+        c.dx *= d.dx;
+        c.dy *= d.dy;
+        c.parent = d;
+        layout(c);
+      });
+    }
+  }
+
+  function display(d) {
+    grandparent
+        .datum(d.parent)
+        .on(&quot;click&quot;, transition)
+      .select(&quot;text&quot;)
+        .text(name(d));
+
+    var g1 = svg.insert(&quot;g&quot;, &quot;.grandparent&quot;)
+        .datum(d)
+        .attr(&quot;class&quot;, &quot;depth&quot;);
+
+    var g = g1.selectAll(&quot;g&quot;)
+        .data(d._children)
+      .enter().append(&quot;g&quot;);
+
+    g.filter(function(d) { return d._children; })
+        .classed(&quot;children&quot;, true)
+        .on(&quot;click&quot;, transition);
+
+    var children = g.selectAll(&quot;.child&quot;)
+        .data(function(d) { return d._children || [d]; })
+      .enter().append(&quot;g&quot;);
+
+// This title element is what shows on hover e.g. Messi (8.1)
+// Used an if statement to change title for players ratings vs averages
+
+    children.append(&quot;rect&quot;)
+        .attr(&quot;class&quot;, &quot;child&quot;)
+        .call(rect)
+      .append(&quot;title&quot;)
+        .text(function(d) { 
+			if (d.value &lt;= 10.00) {return d.key + &quot; (&quot; + formatNumber(d.value) + &quot;)&quot;;}
+            else { return d.key + &quot; (&quot; + formatNumber(d.value/d._children.length) + &quot;)&quot;;}});
+			
+    children.append(&quot;text&quot;)
+        .attr(&quot;class&quot;, &quot;ctext&quot;)
+        .text(function(d) { return d.key; })
+        .call(text2);
+
+    g.append(&quot;rect&quot;)
+        .attr(&quot;class&quot;, &quot;parent&quot;)
+        .call(rect);
+
+    var t = g.append(&quot;text&quot;)
+        .attr(&quot;class&quot;, &quot;ptext&quot;)
+        .attr(&quot;dy&quot;, &quot;.75em&quot;)
+
+    t.append(&quot;tspan&quot;)
+        .text(function(d) { return d.key; });
+    t.append(&quot;tspan&quot;)
+        .attr(&quot;dy&quot;, &quot;1.0em&quot;)
+        .text(function(d) {
+            if (d.value &lt;= 10.00) {return formatNumber(d.value)}
+            else { return formatNumber(d.value/d._children.length)}});
+    t.call(text);
+
+    g.selectAll(&quot;rect&quot;)
+        .style(&quot;fill&quot;, function(d) { return color(d.team); });
+
+    function transition(d) {
+      if (transitioning || !d) return;
+      transitioning = true;
+
+      var g2 = display(d),
+          t1 = g1.transition().duration(750),
+          t2 = g2.transition().duration(750);
+
+      // Update the domain only after entering new elements.
+      x.domain([d.x, d.x + d.dx]);
+      y.domain([d.y, d.y + d.dy]);
+
+      // Enable anti-aliasing during the transition.
+      svg.style(&quot;shape-rendering&quot;, null);
+
+      // Draw child nodes on top of parent nodes.
+      svg.selectAll(&quot;.depth&quot;).sort(function(a, b) { return a.depth - b.depth; });
+
+      // Fade-in entering text.
+      g2.selectAll(&quot;text&quot;).style(&quot;fill-opacity&quot;, 0);
+
+      // Transition to the new view.
+      t1.selectAll(&quot;.ptext&quot;).call(text).style(&quot;fill-opacity&quot;, 0);
+      t1.selectAll(&quot;.ctext&quot;).call(text2).style(&quot;fill-opacity&quot;, 0);
+      t2.selectAll(&quot;.ptext&quot;).call(text).style(&quot;fill-opacity&quot;, 1);
+      t2.selectAll(&quot;.ctext&quot;).call(text2).style(&quot;fill-opacity&quot;, 1);
+      t1.selectAll(&quot;rect&quot;).call(rect);
+      t2.selectAll(&quot;rect&quot;).call(rect);
+
+      // Remove the old node when the transition is finished.
+      t1.remove().each(&quot;end&quot;, function() {
+        svg.style(&quot;shape-rendering&quot;, &quot;crispEdges&quot;);
+        transitioning = false;
+      });
+    }
+
+    return g;
+  }
+
+  function text(text) {
+    text.selectAll(&quot;tspan&quot;)
+        .attr(&quot;x&quot;, function(d) { return x(d.x) + 6; })
+    text.attr(&quot;x&quot;, function(d) { return x(d.x) + 6; })
+        .attr(&quot;y&quot;, function(d) { return y(d.y) + 6; })
+        .style(&quot;opacity&quot;, function(d) { return this.getComputedTextLength() &lt; x(d.x + d.dx) - x(d.x) ? 1 : 0; });
+  }
+
+  function text2(text) {
+    text.attr(&quot;x&quot;, function(d) { return x(d.x + d.dx) - this.getComputedTextLength() - 6; })
+        .attr(&quot;y&quot;, function(d) { return y(d.y + d.dy) - 6; })
+        .style(&quot;opacity&quot;, function(d) { return this.getComputedTextLength() + 100 &lt; x(d.x + d.dx) - x(d.x) ? 1 : 0; });
+  }
+
+  function rect(rect) {
+    rect.attr(&quot;x&quot;, function(d) { return x(d.x); })
+        .attr(&quot;y&quot;, function(d) { return y(d.y); })
+        .attr(&quot;width&quot;, function(d) { return x(d.x + d.dx) - x(d.x); })
+        .attr(&quot;height&quot;, function(d) { return y(d.y + d.dy) - y(d.y); });
+  }
+
+  function name(d) {
+    return d.parent
+        ? name(d.parent) + &quot; / &quot; + d.key + &quot; Average Rating (&quot; + formatNumber(d.value/d._children.length) + &quot;)&quot;
+        : d.key + &quot; Average Rating (&quot; + formatNumber(d.value/(d._children.length*11)) + &quot;)&quot;;
+  }
+}
+
+if (window.location.hash === &quot;&quot;) {
+    d3.json(&quot;/assets/data.json&quot;, function(err, res) {
+        if (!err) {
+            console.log(res);
+            var data = d3.nest().key(function(d) { return d.team; }).entries(res);
+            main({title: &quot;BPL&#39;s Most In-Form Teams and Players&quot;}, {key: &quot;BPL&quot;, values: data});
+        }
+    });
+}
+
+&lt;/script&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;texty text text text&lt;/p&gt;
+</description>
+        <pubDate>Sat, 10 Sep 2016 00:00:00 -0500</pubDate>
+        <link>http://nsalas24.github.io/other/2016/09/10/Premier-League-Player-Ratings-Using-D3/</link>
+        <guid isPermaLink="true">http://nsalas24.github.io/other/2016/09/10/Premier-League-Player-Ratings-Using-D3/</guid>
+        
+        
+        <category>Other</category>
+        
+      </item>
+    
+      <item>
+        <title>Reference for scribing class notes and assignments in R Markdown</title>
+        <description>&lt;h1 id=&quot;overview&quot;&gt;Overview&lt;/h1&gt;
+
+&lt;p&gt;R Markdown is a low-overhead way of writing reports which includes R code and
+the code’s automatically-generated output.  It also lets you include
+nicely-typeset math, hyperlinks, images, and some basic formatting.  The goal
+of this document is to explain, with examples, how to use its most essential
+features.  It is &lt;em&gt;not&lt;/em&gt; a comprehensive reference.  (See rather
+http://rmarkdown.rstudio.com.)&lt;/p&gt;
+
+&lt;p&gt;This guide assumes that you know at least some R.&lt;/p&gt;
+
+&lt;p&gt;This guide has been modified from the one &lt;a href=&quot;http://www.stat.cmu.edu/~cshalizi/rmarkdown/rmarkdown.Rmd&quot;&gt;here&lt;/a&gt;. Corrections and suggestions
+are welcome.&lt;/p&gt;
+
+&lt;h1 id=&quot;mark-up-markdown&quot;&gt;Mark Up, Markdown&lt;/h1&gt;
+
+&lt;p&gt;You are probably used to word processing programs, like Microsoft Word, which
+employ the “what you see is what you get” (WYSIWYG) principle: you want some
+words to be printed in italics, and, lo, they’re in italics right there on the
+screen.  You want some to be in a bigger, different font and you just select
+the font, and so on.  This works well enough for starting out but is not a viable
+basis for a system of text formatting, because it depends on a particular
+program (a) knowing what you mean and (b) implementing it well.&lt;/p&gt;
+
+&lt;p&gt;For several
+decades, really serious systems for writing have been based on a very different
+principle, that of &lt;em&gt;marking up&lt;/em&gt; text.  The essential idea in a &lt;strong&gt;mark-up
+language&lt;/strong&gt; is that it consists of ordinary text, &lt;em&gt;plus&lt;/em&gt; signs which indicate
+how to change the formatting or meaning of the text.  Some mark-up languages,
+like HTML (Hyper-Text Markup Language) use very obtrusive markup; others,
+like the language called &lt;strong&gt;Markdown&lt;/strong&gt;, are more subtle.  For instance, the
+last few sentences in Markdown look like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;For several decades, really serious systems for writing have been based on a
+very different principle, that of _marking up_ text.  The essential idea in a
+**mark-up language** is that it consists of ordinary text, _plus_ signs which
+indicate how to change the formatting or meaning of the text.  Some mark-up
+languages, like HTML (Hyper-Text Markup Language) use very obtrusive markup;
+others, like the language called **Markdown**, are more subtle.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Every mark-up language needs to be &lt;strong&gt;rendered&lt;/strong&gt; somehow into a format which
+actually includes the fancy formatting, images, mathematics, computer code,
+etc., etc., specified by the mark-up.  For HTML, the rendering program is
+called a “web browswer”.  Most computers which know how to work with Markdown
+at all know how to render it as HTML (which you can then view in a browser),
+PDF (which you can then view in Acrobat or the like), or Word (which you can
+then view in the abomination of Redmond).&lt;/p&gt;
+
+&lt;p&gt;The advantages of mark-up languages are many: they tend to be more portable
+across machines, less beholden to particular software companies, and more
+stable over time than WYSIWYG word processing programs.  R Markdown is, in
+particular, both “free as in beer” (you will never pay a dollar for software to
+use it) and “free as in speech” (the specification is completely open to all to
+inspect).  Even if you are completely OK with making obeisance to the
+Abomination of Redmond every time you want to read your own words, the sheer
+stability of mark-up languages makes them superior for scientific documents.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://daringfireball.net/projects/markdown/basics&quot;&gt;&lt;strong&gt;Markdown&lt;/strong&gt;&lt;/a&gt; is a
+low-overhead mark-up language invented by John Gruber.  There are now many
+programs for translating documents written in Markdown into documents in HTML,
+PDF or even Word format (among others).
+&lt;a href=&quot;http://rmarkdown.rstudio.com&quot;&gt;&lt;strong&gt;R Markdown&lt;/strong&gt;&lt;/a&gt; is an extension of Markdown to
+incorporate running code, in R, and including its output in the document.  This
+document looks in turn at three aspects of R Markdown: how to include basic
+formatting; how to include R code and its output; and how to include
+mathematics.&lt;/p&gt;
+
+&lt;h1 id=&quot;rendering-and-editing&quot;&gt;Rendering and Editing&lt;/h1&gt;
+
+&lt;p&gt;To write R Markdown, you will need a text editor, a program which lets you read
+and write plain text files.  You will also need R, and the package &lt;code class=&quot;highlighter-rouge&quot;&gt;rmarkdown&lt;/code&gt;
+(and all the packages it depends on).&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Most computers come with a text editor (TextEdit on the Mac, Notepad on Windows machines, etc.).&lt;/li&gt;
+  &lt;li&gt;There are also lots of higher-powered text editors like &lt;a href=&quot;http://www.gnu.org/software/emacs/emacs.html&quot;&gt;Emacs&lt;/a&gt;, but I admit it has a harsh learning curve.&lt;/li&gt;
+  &lt;li&gt;You &lt;em&gt;could&lt;/em&gt; use Word (or some other WYSIWYG word processor), taking care to always save your document in plain text format.  I do not recommend this.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.rstudio.com&quot;&gt;R Studio&lt;/a&gt; comes with a built-in text editor, which knows about, and has lots of tools for, working with R Markdown documents.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If this is your first time using a text editor for something serious, I recommend using R Studio. Using R Studio for this class will be immensely useful.&lt;/p&gt;
+
+&lt;h3 id=&quot;rendering-in-r-studio&quot;&gt;Rendering in R Studio&lt;/h3&gt;
+
+&lt;p&gt;Assuming you have the document you’re working on open in the text editor,
+click the button that says “knit”.&lt;/p&gt;
+
+&lt;h3 id=&quot;rendering-in-r-without-using-r-studio&quot;&gt;Rendering in R without using R Studio&lt;/h3&gt;
+
+&lt;p&gt;See the &lt;code class=&quot;highlighter-rouge&quot;&gt;render&lt;/code&gt; command in the package &lt;code class=&quot;highlighter-rouge&quot;&gt;rmarkdown&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;rendering-from-the-command-line-unix-type-systems&quot;&gt;Rendering from the command line (Unix-type systems)&lt;/h3&gt;
+
+&lt;p&gt;If you prefer to render from the command line, the Perl script &lt;a href=&quot;http://www.stat.cmu.edu/~cshalizi/rmarkdown/rmarkdown.pl&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rmarkdown.pl&lt;/code&gt;&lt;/a&gt;
+accompanying this will do the job.  The usage is &lt;code class=&quot;highlighter-rouge&quot;&gt;rmarkdown.pl filename&lt;/code&gt;, and
+results in the output &lt;code class=&quot;highlighter-rouge&quot;&gt;filename.html&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;filename.pdf&lt;/code&gt;, as specified in the
+file itself.  (See below.)&lt;/p&gt;
+
+&lt;h1 id=&quot;basic-formatting-in-r-markdown&quot;&gt;Basic Formatting in R Markdown&lt;/h1&gt;
+
+&lt;p&gt;For the most part, text is just text.  One advantage of R Markdown is that the
+vast majority of your document will be stuff you just type as you ordinarily
+would.&lt;/p&gt;
+
+&lt;h3 id=&quot;paragraph-breaks-and-forced-line-breaks&quot;&gt;Paragraph Breaks and Forced Line Breaks&lt;/h3&gt;
+
+&lt;p&gt;To insert a break between paragraphs, include a single completely blank line.&lt;/p&gt;
+
+&lt;p&gt;To force a line break, put &lt;em&gt;two&lt;/em&gt; blank&lt;br /&gt;
+spaces at the end of a line.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;To insert a break between paragraphs, include a single completely blank line.
+
+To force a line break, put _two_ blank  
+spaces at the end of a line.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;headers&quot;&gt;Headers&lt;/h3&gt;
+
+&lt;p&gt;The character &lt;code class=&quot;highlighter-rouge&quot;&gt;#&lt;/code&gt; at the beginning of a line means that the rest of the line is
+interpreted as a section header.  The number of &lt;code class=&quot;highlighter-rouge&quot;&gt;#&lt;/code&gt;s at the beginning of the
+line indicates whether it is treated as a section, sub-section,
+sub-sub-section, etc. of the document.  For instance, &lt;code class=&quot;highlighter-rouge&quot;&gt;Basic Formatting in R
+Markdown&lt;/code&gt; above is preceded by a single &lt;code class=&quot;highlighter-rouge&quot;&gt;#&lt;/code&gt;, but &lt;code class=&quot;highlighter-rouge&quot;&gt;Headers&lt;/code&gt; at the start of this
+paragraph was preceded by &lt;code class=&quot;highlighter-rouge&quot;&gt;###&lt;/code&gt;.  Do not interrupt these headers by line-breaks.&lt;/p&gt;
+
+&lt;h3 id=&quot;italics-boldface&quot;&gt;Italics, Boldface&lt;/h3&gt;
+
+&lt;p&gt;Text to be &lt;em&gt;italicized&lt;/em&gt; goes inside &lt;em&gt;a single set of underscores&lt;/em&gt; or
+&lt;em&gt;asterisks&lt;/em&gt;.  Text to be &lt;strong&gt;boldfaced&lt;/strong&gt; goes inside a &lt;strong&gt;double set of
+underscores&lt;/strong&gt; or &lt;strong&gt;asterisks&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Text to be _italicized_ goes inside _a single set of underscores_ or *asterisks*.  Text to be **boldfaced** goes inside a __double set of underscores__  or **asterisks**.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;quotations&quot;&gt;Quotations&lt;/h3&gt;
+
+&lt;p&gt;Set-off quoted paragraphs are indicated by an initial &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;&lt;/code&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In fact, all epistemological value of the theory of probability is based on this: that large-scale random phenomena in their collective action create strict, nonrandom regularity.  [Gnedenko and Kolmogorov, &lt;em&gt;Limit Distributions for Sums of Independent Random Variables&lt;/em&gt;, p. 1]&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; In fact, all epistemological value of the theory of probability is based on this: that large-scale random phenomena in their collective action create strict, nonrandom regularity.  [Gnedenko and Kolmogorov, _Limit Distributions for Sums of Independent Random Variables_, p. 1]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;computer-type&quot;&gt;Computer Type&lt;/h3&gt;
+
+&lt;p&gt;Text to be printed in a fixed-width font, without further interpretation, goes
+in paired left-single-quotes, a.k.a. “back-ticks”, without line breaks in your
+typing.  (Thus &lt;code class=&quot;highlighter-rouge&quot;&gt;R&lt;/code&gt; vs. R.)  If you want to display multiple lines like this,
+start them with three back ticks in a row on a line by themselves, and end them
+the same way:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Text to be printed in a fixed-width font, without further interpretation, goes in paired left-single-quotes, a.k.a. &quot;back-ticks&quot;, without line breaks in your typing.  (Thus `R` vs. R.)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;bullet-lists&quot;&gt;Bullet Lists&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;This is a list marked where items are marked with bullet points.&lt;/li&gt;
+  &lt;li&gt;Each item in the list should start with a &lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt; (asterisk) character.&lt;/li&gt;
+  &lt;li&gt;Each item should also be on a new line.
+    &lt;ul&gt;
+      &lt;li&gt;Indent lines and begin them with &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt; for sub-bullets.&lt;/li&gt;
+      &lt;li&gt;Sub-sub-bullet aren’t really a thing in R Markdown.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;numbered-lists&quot;&gt;Numbered lists&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Lines which begin with a numeral (0–9), followed by a period, will usually be interpreted as items in a numbered list.&lt;/li&gt;
+  &lt;li&gt;R Markdown handles the numbering in what it renders automatically.&lt;/li&gt;
+  &lt;li&gt;This can be handy when you lose count or don’t update the numbers yourself when editing.  (Look carefully at the .Rmd file for this item.)
+ a. Sub-lists of numbered lists, with letters for sub-items, are a thing.
+ b. They are however a fragile thing, which you’d better not push too hard.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;title-author-date-output-format&quot;&gt;Title, Author, Date, Output Format&lt;/h3&gt;
+
+&lt;p&gt;You can specify things like title, author and date in the &lt;strong&gt;header&lt;/strong&gt; of your
+R Markdown file.  This goes at the very beginning of the file, preceded
+and followed by lines containing three dashes.  Thus the beginning of
+this file looks like so:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+---
+title: Using R Markdown for Class Reports
+author: CRS
+date: Last revised 15 August 2016
+---
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;You can also use the header to tell R Markdown whether you want it to render to
+HTML (the default), PDF, or something else.  To have this turned into HTML,
+for instance, I’d write
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+---
+title: Using R Markdown for Class Reports
+author: CRS
+date: Last revised 15 August 2016
+output: pdf_document
+---
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;To create PDF, a program called &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt; (see below) has to be installed
+on your computer.&lt;/li&gt;
+  &lt;li&gt;Other output formats may be available.  See &lt;code class=&quot;highlighter-rouge&quot;&gt;help(render)&lt;/code&gt; in the &lt;code class=&quot;highlighter-rouge&quot;&gt;rmarkdown&lt;/code&gt;
+package.&lt;/li&gt;
+  &lt;li&gt;There are many, many other formatting options which can be given in the
+header; see the main R Markdown help files online.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;hyperlinks-and-images&quot;&gt;Hyperlinks and Images&lt;/h1&gt;
+
+&lt;h3 id=&quot;hyperlinks&quot;&gt;Hyperlinks&lt;/h3&gt;
+
+&lt;p&gt;Hyperlinks anchored by URLs are easy: just type the URL, as, e.g.,
+http://www.math.uiuc.edu/~umaravat/ to get to my website&lt;/p&gt;
+
+&lt;p&gt;Hyperlinks anchored to text have the &lt;a href=&quot;http://www.math.uiuc.edu/~umaravat/&quot;&gt;anchor in square brackets, then the link
+in parentheses&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[anchor in square brackets, then the link
+in parentheses](http://www.math.uiuc.edu/~umaravat/)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;images&quot;&gt;Images&lt;/h3&gt;
+
+&lt;p&gt;Images begin with an exclamation mark, then the text to use if the
+image can’t be displayed, then either the file address of the image
+(in the same directory as your document) or a URL.  Here are two
+examples, one for an image in the directory and one for a URL.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;including-code&quot;&gt;Including Code&lt;/h1&gt;
+
+&lt;p&gt;The real point of R Markdown is that it lets you include your code, have the
+code run automatically when your document is rendered, and seemlessly include
+the results of that code in your document.  The code comes in two varieties,
+code &lt;strong&gt;chunks&lt;/strong&gt; and &lt;strong&gt;inline&lt;/strong&gt; code.&lt;/p&gt;
+
+&lt;h3 id=&quot;code-chunks-and-their-results&quot;&gt;Code Chunks and Their Results&lt;/h3&gt;
+
+&lt;p&gt;A code &lt;strong&gt;chunk&lt;/strong&gt; is simply an off-set piece of code by itself.  It is preceded
+by ` &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;itself,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;ended&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;which&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;just&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;says&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;/code&gt; `.
+The code itself goes in between.  Here, for instance, is some code which
+loads a data set from a library, and makes a scatter plot.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-{r}&quot;&gt;library(MASS)
+data(cats)
+plot(Hwt ~ Bwt, data=cats, xlab=&quot;Body weight (kg)&quot;, ylab=&quot;Heart weight (g)&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;First, notice how the code is included, nicely formatted, in the document.
+Second, notice how the output of the code is also automatically included
+in the document.  If your code outputs numbers or text, those can be
+included too:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-{r}&quot;&gt;with(cats, cor(Hwt, Bwt))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;inline-code&quot;&gt;Inline Code&lt;/h3&gt;
+
+&lt;p&gt;Code output can also be seamlessly incorporated into the text, using &lt;strong&gt;inline
+code&lt;/strong&gt;.  This is code not set off on a line by itself, but beginning with
+` &lt;code class=&quot;highlighter-rouge&quot;&gt;r &lt;/code&gt; and ending with ` ` &lt;code class=&quot;highlighter-rouge&quot;&gt;.  Using inline code is how this document
+knows that the &lt;/code&gt;cats&lt;code class=&quot;highlighter-rouge&quot;&gt; data set contains &lt;/code&gt;r nrow(cats)&lt;code class=&quot;highlighter-rouge&quot;&gt; rows, and that the
+median weight of the female cats&#39; hearts was &lt;/code&gt;r median(cats$Hwt[cats$Sex==”F”])`
+grams.&lt;/p&gt;
+
+&lt;p&gt;Notice that inline code does &lt;em&gt;not&lt;/em&gt; display the commands run, just their output. You can go to the &lt;code class=&quot;highlighter-rouge&quot;&gt;Rmd&lt;/code&gt; &lt;a href=&quot;ScribeTemplate.Rmd&quot;&gt;source file&lt;/a&gt; to see the command that was run to generate the number of rows and median weight.&lt;/p&gt;
+
+&lt;h3 id=&quot;seen-but-not-heard&quot;&gt;Seen But Not Heard&lt;/h3&gt;
+
+&lt;p&gt;Code chunks (but not inline code) can take a lot of &lt;strong&gt;options&lt;/strong&gt; which modify
+how they are run, and how they appear in the document.  These options go after
+the initial &lt;code class=&quot;highlighter-rouge&quot;&gt;r&lt;/code&gt; and before the closing &lt;code class=&quot;highlighter-rouge&quot;&gt;}&lt;/code&gt; that announces the start of a code
+chunk.  One of the most common options turns off printing out the code,
+but leaves the results alone:
+ ` ```{r, echo=FALSE} `&lt;/p&gt;
+
+&lt;p&gt;Another runs the code, but includes neither the text of the code nor its output.
+ ` ```{r, include=FALSE} `
+This might seem pointless, but it can be useful for code chunks which do set-up
+like loading data files, or initial model estimates, etc.&lt;/p&gt;
+
+&lt;p&gt;Another option prints the code in the document, but does not run it:
+ ` ```{r, eval=FALSE} `
+This is useful if you want to talk about the (nicely formatted) code.&lt;/p&gt;
+
+&lt;h3 id=&quot;naming-chunks&quot;&gt;Naming Chunks&lt;/h3&gt;
+
+&lt;p&gt;You can give chunks names immediately after their opening, like
+` ```{r, clevername} `.  This name is then used for the images (or other files)
+that are generated when the document is rendered.&lt;/p&gt;
+
+&lt;h3 id=&quot;changing-image-sizes-and-alignments&quot;&gt;Changing Image Sizes and Alignments&lt;/h3&gt;
+
+&lt;p&gt;There are a bunch of options for adjusting the placement of the figures which
+R produces.  &lt;code class=&quot;highlighter-rouge&quot;&gt;fig.align&lt;/code&gt; controls the horizontal &lt;strong&gt;alignment&lt;/strong&gt; (left, right,
+or center).&lt;/p&gt;
+
+&lt;p&gt;When producing PDF, the options &lt;code class=&quot;highlighter-rouge&quot;&gt;out.height&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;out.width&lt;/code&gt; let you specify
+the desired height or width of the figure, in inches, centimeters, or multiples
+of pre-defined lengths (from &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt;).  So for instance ` &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;r,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;out.height=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;3in&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;forces&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;the&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;be&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;inches&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;high,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;/code&gt;{r,
+out.width=”0.48\textwidth”} ` forces the image’s width to be a bit less than
+half of the total width of the text on the page (so that two such images will
+fit side by side).  The next few figures illustrate.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;r,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;echo=FALSE,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;fig.width=3,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;fig.align=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;center&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;plot(Hwt&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Bwt,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;data=cats,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;xlab=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Body weight (kg)&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;ylab=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Heart weight (g)&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;sub=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Linear scale&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;plot(Hwt&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Bwt,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;data=cats,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;log=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;xy&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;xlab=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Body weight (kg)&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;ylab=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Heart weight (g)&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;sub=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Logarithmic scale&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;tables&quot;&gt;Tables&lt;/h3&gt;
+
+&lt;p&gt;The default print-out of matrices, tables, etc. from R Markdown is frankly
+ugly.  The &lt;code class=&quot;highlighter-rouge&quot;&gt;knitr&lt;/code&gt; package contains a very basic command, &lt;code class=&quot;highlighter-rouge&quot;&gt;kable&lt;/code&gt;, which will
+format an array or data frame more nicely for display.&lt;/p&gt;
+
+&lt;p&gt;Compare:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-{r}&quot;&gt;coefficients(summary(lm(Hwt ~ Bwt, data=cats)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;with&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-{r}&quot;&gt;library(knitr) # Only need this the first time!
+kable(coefficients(summary(lm(Hwt ~ Bwt, data=cats))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;— Of course, R’s defaults print out a crazy number of decimal places, but
+this isn’t the time to discuss significant digits, or the &lt;code class=&quot;highlighter-rouge&quot;&gt;signif&lt;/code&gt; function.&lt;/p&gt;
+
+&lt;h3 id=&quot;caching-code-chunks-re-running-only-when-changed&quot;&gt;“Caching” Code Chunks (Re-Running Only When Changed)&lt;/h3&gt;
+
+&lt;p&gt;By default, R Markdown will re-run all of your code every time you render your
+document.  If some of your code is slow, this can add up to a lot of time.  You
+can, however, ask R Markdown to keep track of whether a chunk of code has
+changed, and only re-run it if it has.  This is called &lt;strong&gt;caching&lt;/strong&gt; the chunk.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;r,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;cache=TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;lm(Hwt&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Bwt,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;data=cats)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;One issue is that a chunk of code which hasn’t changed itself might call on
+results of earlier, modified chunks, and then we &lt;em&gt;would&lt;/em&gt; want to re-run the
+downstream chunks.  There are options for manually telling R Markdown “this
+chunk depends on this earlier chunk”, but it’s generally easier to
+let it take care of that, by setting the &lt;code class=&quot;highlighter-rouge&quot;&gt;autodep=TRUE&lt;/code&gt; option.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;If you load a package with the &lt;code class=&quot;highlighter-rouge&quot;&gt;library()&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;require()&lt;/code&gt; commands, R
+Markdown isn’t smart enough to check whether the package has changed
+(or indeed been installed, if you were missing it).  So that won’t
+trigger an automatic re-running of a cached code chunk.&lt;/li&gt;
+  &lt;li&gt;To manually force re-running all code chunks, the easiest thing to do is
+to delete the directory R Markdown will create (named something like
+&lt;em&gt;filename&lt;/em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;_cache&lt;/code&gt;) which it uses to store the state of all code chunks.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;setting-defaults-for-all-chunks&quot;&gt;Setting Defaults for All Chunks&lt;/h3&gt;
+
+&lt;p&gt;You can tell R to set some defaults to apply to all chunks where you don’t
+specifically over-ride them.  Here are the ones I generally use:&lt;/p&gt;
+
+&lt;p&gt;```{r, eval=FALSE}
+# Need the knitr package to set chunk options
+library(knitr)&lt;/p&gt;
+
+&lt;h1 id=&quot;set-knitr-options-for-knitting-code-into-the-report&quot;&gt;Set knitr options for knitting code into the report:&lt;/h1&gt;
+&lt;p&gt;# - Don’t print out code (echo)
+# - Save results so that code blocks aren’t re-run unless code changes (cache),
+# &lt;em&gt;or&lt;/em&gt; a relevant earlier code block changed (autodep), but don’t re-run if the
+# only thing that changed was the comments (cache.comments)
+# - Don’t clutter R output with messages or warnings (message, warning)
+  # This &lt;em&gt;will&lt;/em&gt; leave error messages showing up in the knitted report
+opts_chunk$set(echo=FALSE,
+               cache=TRUE, autodep=TRUE, cache.comments=FALSE,
+               message=FALSE, warning=FALSE)
+```&lt;/p&gt;
+
+&lt;p&gt;This sets some additional options beyond the ones I’ve discussed, like not
+re-running a chunk if only the comments have changed (&lt;code class=&quot;highlighter-rouge&quot;&gt;cache.comments =
+FALSE&lt;/code&gt;), and leaving out messages and warnings.  (I’d only recommend
+suppressing warnings once you’re sure your code is in good shape.)  I would
+typically give this set-up chunk itself the option &lt;code class=&quot;highlighter-rouge&quot;&gt;include=FALSE&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can over-ride these defaults by setting options for individual chunks.&lt;/p&gt;
+
+&lt;h3 id=&quot;more-options&quot;&gt;More Options&lt;/h3&gt;
+
+&lt;p&gt;See [http://yihui.name/knitr/options/] for a complete listing of possible chunk options.&lt;/p&gt;
+
+&lt;h1 id=&quot;math-in-r-markdown&quot;&gt;Math in R Markdown&lt;/h1&gt;
+
+&lt;p&gt;Since this is a statistics class, you need to be able to write out mathematical
+expressions, often long series of them.  R Markdown gives you the syntax to
+render complex mathematical formulas and derivations, and have them displayed
+&lt;em&gt;very&lt;/em&gt; nicely.  Like code, the math can either be inline or set off
+(&lt;strong&gt;displays&lt;/strong&gt;).&lt;/p&gt;
+
+&lt;p&gt;Inline math is marked off witha pair of dollar
+signs (&lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt;), as $\pi r^2$ or $e^{i\pi}$.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Inline math is marked off witha pair of dollar
+signs (`$`), as $\pi r^2$ or $e^{i\pi}$.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Mathematical displays are marked off with &lt;code class=&quot;highlighter-rouge&quot;&gt;\[&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;\]&lt;/code&gt;, as in
+[
+e^{i \pi} = -1
+]&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Mathematical displays are marked off with `\[` and `\]`, as in
+\[
+e^{i \pi} = -1
+\]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Once your text has entered math mode, R Markdown turns over the job of
+converting your text into math to a different program, called LaTeX&lt;sup id=&quot;fnref:latex&quot;&gt;&lt;a href=&quot;#fn:latex&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.
+This is the most common system for typesetting mathematical documents
+throughout the sciences, and has been for decades.  It is extremely powerful,
+stable, available on basically every computer, and completely free.  It is
+also, in its full power, pretty complicated.  Fortunately, the most useful
+bits, for our purposes, are actually rather straightforward.&lt;/p&gt;
+
+&lt;h3 id=&quot;elements-of-math-mode&quot;&gt;Elements of Math Mode&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Most letters will be rendered in italics (compare: a vs. &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; vs. $a$; only
+the last is in math mode).  The spacing between letters also follows the conventions for math, so don’t treat it as just another way of getting italics.  (Compare &lt;em&gt;speed&lt;/em&gt;, in simple italics, with $speed$, in math mode.)&lt;/li&gt;
+  &lt;li&gt;Greek letters can be accessed with the slash in front of their names, as &lt;code class=&quot;highlighter-rouge&quot;&gt;\alpha&lt;/code&gt; for $\alpha$.  Making the first letter upper case gives the upper-case letter, as in &lt;code class=&quot;highlighter-rouge&quot;&gt;\Gamma&lt;/code&gt; for $\Gamma$ vs. &lt;code class=&quot;highlighter-rouge&quot;&gt;\gamma&lt;/code&gt; for $\gamma$.  (Upper-case alpha and beta are the same as Roman A and B, so no special commands for them.)&lt;/li&gt;
+  &lt;li&gt;There are other “slashed” (or “escaped”) commands for other mathematical symbols:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\times&lt;/code&gt; for $\times$&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\cdot&lt;/code&gt; for $\cdot$&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\leq&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;\geq&lt;/code&gt; for $\leq$ and $\geq$&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\subset&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;\subseteq&lt;/code&gt; for $\subset$ and $\subseteq$&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\leftarrow&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;\rightarrow&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;\Leftarrow&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;\Rightarrow&lt;/code&gt; for $\leftarrow$, $\rightarrow$, $\Leftarrow$, $\Rightarrow$&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\approx&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;\sim&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;\equiv&lt;/code&gt; for $\approx$, $\sim$, $\equiv$&lt;/li&gt;
+      &lt;li&gt;See, e.g., http://web.ift.uib.no/Teori/KURS/WRK/TeX/symALL.html for a fuller
+listing of available symbols.  (http://tug.ctan.org/info/symbols/comprehensive/symbols-a4.pdf lists &lt;em&gt;all&lt;/em&gt; symbols available in &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt;, including many non-mathematical special chracters)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Subscripts go after an underscore character, &lt;code class=&quot;highlighter-rouge&quot;&gt;_&lt;/code&gt;, and superscripts go after a caret, &lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt;, as &lt;code class=&quot;highlighter-rouge&quot;&gt;\beta_1&lt;/code&gt; for $\beta_1$ or &lt;code class=&quot;highlighter-rouge&quot;&gt;a^2&lt;/code&gt; for $a^2$.&lt;/li&gt;
+  &lt;li&gt;Curly braces are used to create groupings that should be kept together, e.g., &lt;code class=&quot;highlighter-rouge&quot;&gt;a_{ij}&lt;/code&gt; for $a_{ij}$ (vs. &lt;code class=&quot;highlighter-rouge&quot;&gt;a_ij&lt;/code&gt; for $a_ij$).&lt;/li&gt;
+  &lt;li&gt;If you need something set in ordinary (Roman) type within math mode, use &lt;code class=&quot;highlighter-rouge&quot;&gt;\mathrm&lt;/code&gt;, as &lt;code class=&quot;highlighter-rouge&quot;&gt;t_{\mathrm{in}}^2&lt;/code&gt; for $t_{\mathrm{in}}^2$.&lt;/li&gt;
+  &lt;li&gt;If you’d like something set in an outline font (“blackboard bold”), use &lt;code class=&quot;highlighter-rouge&quot;&gt;\mathbb&lt;/code&gt;, as &lt;code class=&quot;highlighter-rouge&quot;&gt;\mathbb{R}&lt;/code&gt; for $\mathbb{R}$.&lt;/li&gt;
+  &lt;li&gt;For bold face, use &lt;code class=&quot;highlighter-rouge&quot;&gt;\mathbf&lt;/code&gt;, as
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+(\mathbf{x}^T\mathbf{x})^{-1}\mathbf{x}^T\mathbf{y}
+&lt;/code&gt;
+for
+[
+(\mathbf{x}^T\mathbf{x})^{-1}\mathbf{x}^T\mathbf{y}
+]&lt;/li&gt;
+  &lt;li&gt;Accents on characters work rather like changes of font: &lt;code class=&quot;highlighter-rouge&quot;&gt;\vec{a}&lt;/code&gt; produces
+$\vec{a}$, &lt;code class=&quot;highlighter-rouge&quot;&gt;\hat{a}&lt;/code&gt; produces $\hat{a}$.  Some accents, particularly hats,
+work better if they space out, as with &lt;code class=&quot;highlighter-rouge&quot;&gt;\widehat{\mathrm{Var}}&lt;/code&gt; producing
+$\widehat{\mathrm{Var}}$.&lt;/li&gt;
+  &lt;li&gt;Function names are typically written in romans, and spaced differently: thus
+$\log{x}$, not $log x$.  &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt;, and therefore &lt;code class=&quot;highlighter-rouge&quot;&gt;R Markdown&lt;/code&gt;, knows about a
+lot of such functions, and their names all begin with &lt;code class=&quot;highlighter-rouge&quot;&gt;\&lt;/code&gt;.  For instance:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;\log&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;\sin&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;\cos&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;\exp&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;\min&lt;/code&gt;, etc.  Follow these function names
+with the argument in curly braces; this helps &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt; figure out what exactly
+the argument is, and keep it grouped together with the function name when
+it’s laying out the text.  Thus &lt;code class=&quot;highlighter-rouge&quot;&gt;\log{(x+1)}&lt;/code&gt; is better than &lt;code class=&quot;highlighter-rouge&quot;&gt;\log (x+1)&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Fractions can be created with &lt;code class=&quot;highlighter-rouge&quot;&gt;\frac&lt;/code&gt;, like so:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+\frac{a+b}{b} = 1 + \frac{a}{b}
+&lt;/code&gt;
+produces
+[
+\frac{a+b}{b} = 1 + \frac{a}{b}
+]&lt;/li&gt;
+  &lt;li&gt;Sums can be written like so:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+\sum_{i=1}^{n}{x_i^2}
+&lt;/code&gt;
+will produce
+[
+\sum_{i=1}^{n}{x_i^2}
+]
+The lower and upper limits of summation after the &lt;code class=&quot;highlighter-rouge&quot;&gt;\sum&lt;/code&gt; are both optional.
+Products and integrals work similarly, only with &lt;code class=&quot;highlighter-rouge&quot;&gt;\prod&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;\int&lt;/code&gt;:
+[
+n! = \prod_{i=1}^{n}{i}
+]
+[
+\log{b} - \log{a} = \int_{x=a}^{x=b}{\frac{1}{x} dx}
+]
+&lt;code class=&quot;highlighter-rouge&quot;&gt;\sum&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;\prod&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;\int&lt;/code&gt; all automatically adjust to the size of the expression being summed, producted or integrated.&lt;/li&gt;
+  &lt;li&gt;“Delimiters”, like parentheses or braces, can automatically re-size to match what they’re surrounding.  To do this, you need to use &lt;code class=&quot;highlighter-rouge&quot;&gt;\left&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;\right&lt;/code&gt;,
+as
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+\left( \sum_{i=1}^{n}{i} \right)^2 = \left( \frac{n(n-1)}{2}\right)^2 = \frac{n^2(n-1)^2}{4}
+&lt;/code&gt;
+renders as
+[
+\left( \sum_{i=1}^{n}{i} \right)^2 = \left( \frac{n(n-1)}{2}\right)^2 = \frac{n^2(n-1)^2}{4}
+]
+    &lt;ul&gt;
+      &lt;li&gt;To use curly braces as delimiters, precede them with slashes, as &lt;code class=&quot;highlighter-rouge&quot;&gt;\{&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;\}&lt;/code&gt; for ${$ and $}$.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Multiple equations, with their equals signs lined up, can be created
+using &lt;code class=&quot;highlighter-rouge&quot;&gt;eqnarray&lt;/code&gt;, as follows.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+\[
+\begin{eqnarray}
+X &amp;amp; \sim &amp;amp; \mathrm{N}(0,1)\\
+Y &amp;amp; \sim &amp;amp; \chi^2_{n-p}\\
+R &amp;amp; \equiv &amp;amp; X/Y \sim t_{n-p}
+\end{eqnarray}
+\]
+&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;[
+\begin{eqnarray}
+X &amp;amp; \sim &amp;amp; \mathrm{N}(0,1)&lt;br /&gt;
+Y &amp;amp; \sim &amp;amp; \chi^2_{n-p}&lt;br /&gt;
+R &amp;amp; \equiv &amp;amp; X/Y \sim t_{n-p}
+\end{eqnarray}
+]
+Notice that &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;amp;&lt;/code&gt; surrounds what goes in the middle on each line, and each line (except the last) is terminated with &lt;code class=&quot;highlighter-rouge&quot;&gt;\\&lt;/code&gt;.  The left or right hand side of the equation can be blank, and space will be made:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+\[
+\begin{eqnarray}
+P(|X-\mu| &amp;gt; k) &amp;amp; = &amp;amp; P(|X-\mu|^2 &amp;gt; k^2)\\
+&amp;amp; \leq &amp;amp; \frac{\mathbb{E}\left[|X-\mu|^2\right]}{k^2}\\
+&amp;amp; \leq &amp;amp; \frac{\mathrm{Var}[X]}{k^2}
+\end{eqnarray}
+\]
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;[
+\begin{eqnarray}
+P(|X-\mu| &amp;gt; k) &amp;amp; = &amp;amp; P(|X-\mu|^2 &amp;gt; k^2)&lt;br /&gt;
+&amp;amp; \leq &amp;amp; \frac{\mathbb{E}\left[|X-\mu|^2\right]}{k^2}&lt;br /&gt;
+&amp;amp; \leq &amp;amp; \frac{\mathrm{Var}[X]}{k^2}
+\end{eqnarray}
+]&lt;/p&gt;
+
+&lt;p&gt;(In full &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;\begin{eqnarray}&lt;/code&gt; automatically enters math mode, but
+R Markdown needs the hint.)&lt;/p&gt;
+
+&lt;h3 id=&quot;translating-math-into-latex&quot;&gt;Translating Math into &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt; is designed so that every part of a mathematical expression has a
+reasonably straightforward counterpart in what you write.  Still, it can be a
+bit intimidating at first.  What many people find useful to to start by taking
+some page of printed or hand-written math and then deliberately translate that,
+line by line, into &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt;, and then rendering it to see whether it came out
+right (and, if not, where to fix things).  If you need to do any math for an
+assignment, it can be a good idea to write the math out by hand, and then turn
+it into &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt;, whether the class requires it (like this one) or not.
+Eventually, with practice, the translation will become quite automatic, and
+some people even do new math by writing out the &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;latex-does-not-check-correctness&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt; Does Not Check Correctness&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt; does not check whether your math is &lt;em&gt;right&lt;/em&gt;; it just checks whether
+it can figure out what you’re trying to say well enough to type-set it.
+Thus for instance it has no problem at all with the following:&lt;/p&gt;
+
+&lt;p&gt;[
+\begin{eqnarray}
+(n+1)(n-1) &amp;amp; = &amp;amp; n^2&lt;br /&gt;
+n^2 -1 &amp;amp; = &amp;amp; n^2&lt;br /&gt;
+-1 &amp;amp; = &amp;amp; 0&lt;br /&gt;
+1 &amp;amp; = &amp;amp; 0&lt;br /&gt;
+-1 &amp;amp; = &amp;amp; 1
+\end{eqnarray}
+]&lt;/p&gt;
+
+&lt;p&gt;(There &lt;em&gt;are&lt;/em&gt; computer programs for doing symbolic mathematics which, in effect,
+do check whether your math is right, at least if you’re working in the sub-area
+of math they’re designed to handle.  So far as I know, no one has ever really
+combined them with &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt;.)&lt;/p&gt;
+
+&lt;h3 id=&quot;more-advanced-math-mode-stuff-new-commands&quot;&gt;More Advanced Math-Mode Stuff: New Commands&lt;/h3&gt;
+
+&lt;p&gt;One of the things you can do in &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt; is create your own commands.
+This is useful if you find yourself writing out the same complicated expression
+repeatedly, or, alternatively, if you want to make sure that the same
+symbol is always used for the same concept.  For instance, in some areas of
+statistics, the generic parameter of a model is $\theta$, in others $\beta$,
+in yet others $\psi$.  If you do something like this early on
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+\[
+\newcommand{\MyParameter}{\theta}
+\]
+&lt;/code&gt;
+then in later bits of math mode you can write &lt;code class=&quot;highlighter-rouge&quot;&gt;\MyParameter&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt; will
+translate this to &lt;code class=&quot;highlighter-rouge&quot;&gt;\theta&lt;/code&gt;.  If you later decide that you want your parameter
+to be &lt;code class=&quot;highlighter-rouge&quot;&gt;\beta&lt;/code&gt;, or even &lt;code class=&quot;highlighter-rouge&quot;&gt;\mathrm{fred}&lt;/code&gt;, you just change that initial definition
+of the new command, rather than having to track down each &lt;code class=&quot;highlighter-rouge&quot;&gt;\theta&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;New commands can also take one or more arguments.  Here is a useful command
+for writing expectations:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+\[
+\newcommand{\Expect}[1]{\mathbb{E}\left[ #1 \right]}
+\]
+&lt;/code&gt;
+And here is a command for writing covariances:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+\[
+\newcommand{\Cov}[2]{\mathrm{Cov}\left[ #1, #2\right]}
+\]
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Defining commands like this not only saves you typing, and makes it easier to
+make changes; it also makes your math-mode text easier for you, or others, to
+read even if it isn’t rendered.  This is like using comprehensible
+variable and function names in your programs, and for that matter like
+using functions rather than long strings of commands in the first place.&lt;/p&gt;
+
+&lt;p&gt;It is also possible to define new function names which act like &lt;code class=&quot;highlighter-rouge&quot;&gt;\log&lt;/code&gt;,
+new mathematical operators, draw diagrams, etc., etc., but that goes way
+beyond the scope of these notes.&lt;/p&gt;
+
+&lt;h3 id=&quot;installing-latex&quot;&gt;Installing &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;If you render your R Markdown document to HTML, you do not need to install
+&lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt; on your computer.  This is because the HTML includes instructions to
+browsers, which say (as it were) “Send the funny-looking bits with all the
+slashes to &lt;a href=&quot;http://www.mathjax.org&quot;&gt;mathjax.org&lt;/a&gt;, and it will send you back
+pretty pictures of equations”.  The website actually runs the &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you want to produce PDF, you need to have &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt; installed on your
+computer.  How you actually do this depends on the precise kind of computer.
+For Macs, I recommend using the &lt;code class=&quot;highlighter-rouge&quot;&gt;MacTeX&lt;/code&gt; package, available from
+https://tug.org/mactex/mactex-download.html.  For other systems, follow the
+links from http://www.tug.org/begin.html.&lt;/p&gt;
+
+&lt;h1 id=&quot;putting-it-all-together-writing-your-report-in-r-markdown&quot;&gt;Putting It All Together: Writing Your Report in R Markdown&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You have installed the &lt;code class=&quot;highlighter-rouge&quot;&gt;rmarkdown&lt;/code&gt; package and all its dependencies.&lt;/li&gt;
+  &lt;li&gt;You have installed &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt;, if you’re producing a PDF.&lt;/li&gt;
+  &lt;li&gt;You have installed and fired up your favorite text editor.&lt;/li&gt;
+  &lt;li&gt;You open it up to a new document.
+    &lt;ul&gt;
+      &lt;li&gt;You give it a title, an author, and a date.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;You use headers to divide it into appropriate, titled sections, and possibly sub-sections.
+    &lt;ul&gt;
+      &lt;li&gt;One common pattern: “Introduction”, “Data and Research Questions”, “Analysis”, “Results”, “Conclusion”.&lt;/li&gt;
+      &lt;li&gt;Another common pattern: “Problem 1”, “Problem 2”, … , “Extra Credit”.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;You write text.&lt;/li&gt;
+  &lt;li&gt;When you need it, you insert math into the text, or even whole mathematical
+displays.&lt;/li&gt;
+  &lt;li&gt;When you need it, you insert code into your document.
+    &lt;ul&gt;
+      &lt;li&gt;The code runs (as needed) when you render the document.&lt;/li&gt;
+      &lt;li&gt;Figures, tables, and other output are automatically inserted into the document, and track changes in your code.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Every so often, try to render your document.
+    &lt;ul&gt;
+      &lt;li&gt;When you (think you) have finished a section is a good time to do so.&lt;/li&gt;
+      &lt;li&gt;Another good time is once you’ve made any non-trivial change to the code or the text.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Either your document rendered successfully or it didn’t.
+    &lt;ul&gt;
+      &lt;li&gt;If it did, and you like the results, congratulate yourself and cheerfully go on to your next task.&lt;/li&gt;
+      &lt;li&gt;If it rendered but you don’t like the results, think about why and try to fix it.&lt;/li&gt;
+      &lt;li&gt;If it didn’t render, R will tell you where it gave up, so try to debug from around there.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;troubleshootingstuff-to-avoid&quot;&gt;Troubleshooting/Stuff to Avoid&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Do not call &lt;code class=&quot;highlighter-rouge&quot;&gt;View&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;help&lt;/code&gt; in your document; these are interactive commands
+which don’t work well in scripts.&lt;/li&gt;
+  &lt;li&gt;“It worked in the console but it wouldn’t knit”: You have almost certainly
+done something somewhat different &lt;em&gt;before&lt;/em&gt; the code chunk that’s giving you
+trouble.  Clear your workspace in the console and re-run.
+    &lt;ul&gt;
+      &lt;li&gt;Avoid &lt;code class=&quot;highlighter-rouge&quot;&gt;attach&lt;/code&gt; in both the console and in your file; using it is a recipe
+for creating hard-to-find errors.  You can still shorten expressions using
+&lt;code class=&quot;highlighter-rouge&quot;&gt;with&lt;/code&gt; instead.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;You need LaTeX to create PDFs.  If you are having trouble doing so, try
+switching the output format to HTML.
+    &lt;ul&gt;
+      &lt;li&gt;LaTeX will complain if you try to print out truly enormous things.
+Errors about “out of stack”, or “pandoc 43”, are often caused by this.
+Don’t print out enormous things.  (Suppressing warnings and other
+messages may help.)&lt;/li&gt;
+      &lt;li&gt;Do try to fix your LaTeX installation later, when you don’t have such time
+pressure; it’s really useful.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;When you need to load data files or source someone else’s code, use full
+URLs, rather than creating local copies and loading them from your disk.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;further-reading&quot;&gt;Further Reading&lt;/h1&gt;
+
+&lt;p&gt;For more on R Markdown, see http://rmarkdown.rstudio.com, particularly the
+more detailed help pages (rather than the first-guides).&lt;/p&gt;
+
+&lt;p&gt;For &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt;, the classic reference is the book by Leslie Lamport, &lt;em&gt;LaTeX: A
+Document Preparation System&lt;/em&gt; (2nd ed., Reading, Mass.: Addison-Wesley, 1994).
+This is not, admittedly, the easiest read in the world.
+&lt;a href=&quot;https://en.wikibooks.org/wiki/LaTeX&quot;&gt;&lt;em&gt;LaTeX&lt;/em&gt;&lt;/a&gt;, from Wikibooks, is more
+accessible, and free online in easy bite-sized chunks.&lt;/p&gt;
+
+&lt;p&gt;R Markdown is based on the &lt;code class=&quot;highlighter-rouge&quot;&gt;knitr&lt;/code&gt; package, developed by Yihui Xie, for
+integrated R with &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt;; see http://yihui.name/knitr/, and, for
+full documentation, Xie’s book &lt;em&gt;Dynamic Documents with R and knitr&lt;/em&gt; (2nd
+edition, Boca Raton, Florida; CRC Press, 2015).&lt;/p&gt;
+
+&lt;p&gt;For an thorough, entertaining, and completely correct explanation of why “The
+word processor is a stupid and grossly inefficient tool for preparing text for
+communication with others”, see http://ricardo.ecn.wfu.edu/~cottrell/wp.html.&lt;/p&gt;
+
+&lt;p&gt;mark-up language, and a rendering program for that language, called &lt;code class=&quot;highlighter-rouge&quot;&gt;TeX&lt;/code&gt;
+(pronounced “tech”), for writing complex mathematical documents.  In the 1980s,
+the computer scientist Leslie Lamport extended &lt;code class=&quot;highlighter-rouge&quot;&gt;TeX&lt;/code&gt; in ways that made it
+rather more user-friendly, and called the result &lt;code class=&quot;highlighter-rouge&quot;&gt;LaTeX&lt;/code&gt; (pronounced
+“la-tech”).&lt;/p&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:latex&quot;&gt;
+      &lt;p&gt;In the 1970s, the great computer scientist Donald Knuth wrote a &lt;a href=&quot;#fnref:latex&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Thu, 08 Sep 2016 00:00:00 -0500</pubDate>
+        <link>http://nsalas24.github.io/2016/09/08/Scribe-Template/</link>
+        <guid isPermaLink="true">http://nsalas24.github.io/2016/09/08/Scribe-Template/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Test Post</title>
+        <description>&lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax
+for authoring HTML, PDF, and MS Word documents. For more details on
+using R Markdown see &lt;a href=&quot;http://rmarkdown.rstudio.com&quot;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;When you click the &lt;strong&gt;Knit&lt;/strong&gt; button a document will be generated that
+includes both content as well as the output of any embedded R code
+chunks within the document. You can embed an R code chunk like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;summary(cars)
+
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You can also embed plots, for example:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2016-06-14-Test-Post_files/figure-markdown_strict/unnamed-chunk-2-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Note that the &lt;code class=&quot;highlighter-rouge&quot;&gt;echo = FALSE&lt;/code&gt; parameter was added to the code chunk to
+prevent printing of the R code that generated the plot.&lt;/p&gt;
+
+&lt;p&gt;$\pi r^2$ or $e^{i\pi}$&lt;/p&gt;
+</description>
+        <pubDate>Tue, 14 Jun 2016 00:00:00 -0500</pubDate>
+        <link>http://nsalas24.github.io/other/2016/06/14/Test-Post/</link>
+        <guid isPermaLink="true">http://nsalas24.github.io/other/2016/06/14/Test-Post/</guid>
+        
+        
+        <category>Other</category>
+        
+      </item>
+    
+      <item>
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 17 Apr 2016 18:17:37 -0500</pubDate>
+        <link>http://nsalas24.github.io/jekyll/2016/04/17/welcome-to-jekyll/</link>
+        <guid isPermaLink="true">http://nsalas24.github.io/jekyll/2016/04/17/welcome-to-jekyll/</guid>
+        
+        
+        <category>Jekyll</category>
+        
+      </item>
+    
+  </channel>
+</rss>

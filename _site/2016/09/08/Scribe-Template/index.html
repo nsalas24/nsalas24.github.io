@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Reference for scribing class notes and assignments in R Markdown</title>
+  <meta name="description" content="Overview">
+
+  <link rel="stylesheet" href="/css/paper.css">
+  <link rel="stylesheet" href="/css/helper2.css">
+  <link rel="canonical" href="http://nsalas24.github.io/2016/09/08/Scribe-Template/">
+  <link rel="alternate" type="application/rss+xml" title="Noah Salas" href="http://nsalas24.github.io/feed.xml">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <style type="text/css"></style>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+</head>
+
+  <header class="site-header">
+
+  <div class="wrapper">
+
+    <!----<a class="site-title" href="/">Noah Salas</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>-->
+
+
+    <div class="example3">
+	<nav class="navbar navbar-default navbar-static-top">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="/index/"><img src="/assets/mylogo2.PNG"></a>
+	    </div>
+
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+		
+		    
+		    	
+		      <li><a href="/about/">About</a></li>
+		    	
+		    
+		  
+		    
+		  
+		    
+		  
+		    
+		  
+		    
+		  
+		    
+		  
+		    
+		    	
+		      <li><a href="/projects/">Projects</a></li>
+		    	
+		    
+		  
+		    
+		    	
+		      <li><a href="/resources/">Resources</a></li>
+		    	
+		    
+		  
+		
+		  
+		  </ul>
+
+	      <ul class="nav navbar-nav navbar-right">
+			<li><a href="https://github.com/nsalas24"><span class="icon"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span></a>
+</li>
+			<li><a href="https://www.linkedin.com/in/noah-salas-73540670"><span class="icon"><?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="430.117px" height="430.117px" viewBox="0 0 430.117 430.117" style="enable-background:new 0 0 430.117 430.117;"
+	 xml:space="preserve">
+<g>
+	<path id="LinkedIn" d="M430.117,261.543V420.56h-92.188V272.193c0-37.271-13.334-62.707-46.703-62.707
+		c-25.473,0-40.632,17.142-47.301,33.724c-2.432,5.928-3.058,14.179-3.058,22.477V420.56h-92.219c0,0,1.242-251.285,0-277.32h92.21
+		v39.309c-0.187,0.294-0.43,0.611-0.606,0.896h0.606v-0.896c12.251-18.869,34.13-45.824,83.102-45.824
+		C384.633,136.724,430.117,176.361,430.117,261.543z M52.183,9.558C20.635,9.558,0,30.251,0,57.463
+		c0,26.619,20.038,47.94,50.959,47.94h0.616c32.159,0,52.159-21.317,52.159-47.94C103.128,30.251,83.734,9.558,52.183,9.558z
+		 M5.477,420.56h92.184v-277.32H5.477V420.56z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+</span></a></li>
+	      </ul>
+
+	    </div>
+
+
+
+	  </div>
+
+
+    </nav>
+    </div>
+
+  </div>
+
+</header>
+
+
+
+
+
+  <div style="font-size: 18px; max-width: 1300px; margin-left: auto; margin-right: auto; padding-left:2%; padding-right: 2%;">
+    <body>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Reference for scribing class notes and assignments in R Markdown</h1>
+    <p class="post-meta"><time datetime="2016-09-08T00:00:00-05:00" itemprop="datePublished">Sep 8, 2016</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Noah Salas</span></span></p>
+  </header>
+  <p class="post-update"> <i></i></p>
+  <div class="post-content" itemprop="articleBody">
+    <h1 id="overview">Overview</h1>
+
+<p>R Markdown is a low-overhead way of writing reports which includes R code and
+the code’s automatically-generated output.  It also lets you include
+nicely-typeset math, hyperlinks, images, and some basic formatting.  The goal
+of this document is to explain, with examples, how to use its most essential
+features.  It is <em>not</em> a comprehensive reference.  (See rather
+http://rmarkdown.rstudio.com.)</p>
+
+<p>This guide assumes that you know at least some R.</p>
+
+<p>This guide has been modified from the one <a href="http://www.stat.cmu.edu/~cshalizi/rmarkdown/rmarkdown.Rmd">here</a>. Corrections and suggestions
+are welcome.</p>
+
+<h1 id="mark-up-markdown">Mark Up, Markdown</h1>
+
+<p>You are probably used to word processing programs, like Microsoft Word, which
+employ the “what you see is what you get” (WYSIWYG) principle: you want some
+words to be printed in italics, and, lo, they’re in italics right there on the
+screen.  You want some to be in a bigger, different font and you just select
+the font, and so on.  This works well enough for starting out but is not a viable
+basis for a system of text formatting, because it depends on a particular
+program (a) knowing what you mean and (b) implementing it well.</p>
+
+<p>For several
+decades, really serious systems for writing have been based on a very different
+principle, that of <em>marking up</em> text.  The essential idea in a <strong>mark-up
+language</strong> is that it consists of ordinary text, <em>plus</em> signs which indicate
+how to change the formatting or meaning of the text.  Some mark-up languages,
+like HTML (Hyper-Text Markup Language) use very obtrusive markup; others,
+like the language called <strong>Markdown</strong>, are more subtle.  For instance, the
+last few sentences in Markdown look like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>For several decades, really serious systems for writing have been based on a
+very different principle, that of _marking up_ text.  The essential idea in a
+**mark-up language** is that it consists of ordinary text, _plus_ signs which
+indicate how to change the formatting or meaning of the text.  Some mark-up
+languages, like HTML (Hyper-Text Markup Language) use very obtrusive markup;
+others, like the language called **Markdown**, are more subtle.
+</code></pre>
+</div>
+
+<p>Every mark-up language needs to be <strong>rendered</strong> somehow into a format which
+actually includes the fancy formatting, images, mathematics, computer code,
+etc., etc., specified by the mark-up.  For HTML, the rendering program is
+called a “web browswer”.  Most computers which know how to work with Markdown
+at all know how to render it as HTML (which you can then view in a browser),
+PDF (which you can then view in Acrobat or the like), or Word (which you can
+then view in the abomination of Redmond).</p>
+
+<p>The advantages of mark-up languages are many: they tend to be more portable
+across machines, less beholden to particular software companies, and more
+stable over time than WYSIWYG word processing programs.  R Markdown is, in
+particular, both “free as in beer” (you will never pay a dollar for software to
+use it) and “free as in speech” (the specification is completely open to all to
+inspect).  Even if you are completely OK with making obeisance to the
+Abomination of Redmond every time you want to read your own words, the sheer
+stability of mark-up languages makes them superior for scientific documents.</p>
+
+<p><a href="http://daringfireball.net/projects/markdown/basics"><strong>Markdown</strong></a> is a
+low-overhead mark-up language invented by John Gruber.  There are now many
+programs for translating documents written in Markdown into documents in HTML,
+PDF or even Word format (among others).
+<a href="http://rmarkdown.rstudio.com"><strong>R Markdown</strong></a> is an extension of Markdown to
+incorporate running code, in R, and including its output in the document.  This
+document looks in turn at three aspects of R Markdown: how to include basic
+formatting; how to include R code and its output; and how to include
+mathematics.</p>
+
+<h1 id="rendering-and-editing">Rendering and Editing</h1>
+
+<p>To write R Markdown, you will need a text editor, a program which lets you read
+and write plain text files.  You will also need R, and the package <code class="highlighter-rouge">rmarkdown</code>
+(and all the packages it depends on).</p>
+
+<ul>
+  <li>Most computers come with a text editor (TextEdit on the Mac, Notepad on Windows machines, etc.).</li>
+  <li>There are also lots of higher-powered text editors like <a href="http://www.gnu.org/software/emacs/emacs.html">Emacs</a>, but I admit it has a harsh learning curve.</li>
+  <li>You <em>could</em> use Word (or some other WYSIWYG word processor), taking care to always save your document in plain text format.  I do not recommend this.</li>
+  <li><a href="http://www.rstudio.com">R Studio</a> comes with a built-in text editor, which knows about, and has lots of tools for, working with R Markdown documents.</li>
+</ul>
+
+<p>If this is your first time using a text editor for something serious, I recommend using R Studio. Using R Studio for this class will be immensely useful.</p>
+
+<h3 id="rendering-in-r-studio">Rendering in R Studio</h3>
+
+<p>Assuming you have the document you’re working on open in the text editor,
+click the button that says “knit”.</p>
+
+<h3 id="rendering-in-r-without-using-r-studio">Rendering in R without using R Studio</h3>
+
+<p>See the <code class="highlighter-rouge">render</code> command in the package <code class="highlighter-rouge">rmarkdown</code>.</p>
+
+<h3 id="rendering-from-the-command-line-unix-type-systems">Rendering from the command line (Unix-type systems)</h3>
+
+<p>If you prefer to render from the command line, the Perl script <a href="http://www.stat.cmu.edu/~cshalizi/rmarkdown/rmarkdown.pl"><code class="highlighter-rouge">rmarkdown.pl</code></a>
+accompanying this will do the job.  The usage is <code class="highlighter-rouge">rmarkdown.pl filename</code>, and
+results in the output <code class="highlighter-rouge">filename.html</code> or <code class="highlighter-rouge">filename.pdf</code>, as specified in the
+file itself.  (See below.)</p>
+
+<h1 id="basic-formatting-in-r-markdown">Basic Formatting in R Markdown</h1>
+
+<p>For the most part, text is just text.  One advantage of R Markdown is that the
+vast majority of your document will be stuff you just type as you ordinarily
+would.</p>
+
+<h3 id="paragraph-breaks-and-forced-line-breaks">Paragraph Breaks and Forced Line Breaks</h3>
+
+<p>To insert a break between paragraphs, include a single completely blank line.</p>
+
+<p>To force a line break, put <em>two</em> blank<br />
+spaces at the end of a line.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>To insert a break between paragraphs, include a single completely blank line.
+
+To force a line break, put _two_ blank  
+spaces at the end of a line.
+</code></pre>
+</div>
+
+<h3 id="headers">Headers</h3>
+
+<p>The character <code class="highlighter-rouge">#</code> at the beginning of a line means that the rest of the line is
+interpreted as a section header.  The number of <code class="highlighter-rouge">#</code>s at the beginning of the
+line indicates whether it is treated as a section, sub-section,
+sub-sub-section, etc. of the document.  For instance, <code class="highlighter-rouge">Basic Formatting in R
+Markdown</code> above is preceded by a single <code class="highlighter-rouge">#</code>, but <code class="highlighter-rouge">Headers</code> at the start of this
+paragraph was preceded by <code class="highlighter-rouge">###</code>.  Do not interrupt these headers by line-breaks.</p>
+
+<h3 id="italics-boldface">Italics, Boldface</h3>
+
+<p>Text to be <em>italicized</em> goes inside <em>a single set of underscores</em> or
+<em>asterisks</em>.  Text to be <strong>boldfaced</strong> goes inside a <strong>double set of
+underscores</strong> or <strong>asterisks</strong>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Text to be _italicized_ goes inside _a single set of underscores_ or *asterisks*.  Text to be **boldfaced** goes inside a __double set of underscores__  or **asterisks**.
+</code></pre>
+</div>
+
+<h3 id="quotations">Quotations</h3>
+
+<p>Set-off quoted paragraphs are indicated by an initial <code class="highlighter-rouge">&gt;</code>:</p>
+
+<blockquote>
+  <p>In fact, all epistemological value of the theory of probability is based on this: that large-scale random phenomena in their collective action create strict, nonrandom regularity.  [Gnedenko and Kolmogorov, <em>Limit Distributions for Sums of Independent Random Variables</em>, p. 1]</p>
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt; In fact, all epistemological value of the theory of probability is based on this: that large-scale random phenomena in their collective action create strict, nonrandom regularity.  [Gnedenko and Kolmogorov, _Limit Distributions for Sums of Independent Random Variables_, p. 1]
+</code></pre>
+</div>
+
+<h3 id="computer-type">Computer Type</h3>
+
+<p>Text to be printed in a fixed-width font, without further interpretation, goes
+in paired left-single-quotes, a.k.a. “back-ticks”, without line breaks in your
+typing.  (Thus <code class="highlighter-rouge">R</code> vs. R.)  If you want to display multiple lines like this,
+start them with three back ticks in a row on a line by themselves, and end them
+the same way:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Text to be printed in a fixed-width font, without further interpretation, goes in paired left-single-quotes, a.k.a. "back-ticks", without line breaks in your typing.  (Thus `R` vs. R.)
+</code></pre>
+</div>
+
+<h3 id="bullet-lists">Bullet Lists</h3>
+
+<ul>
+  <li>This is a list marked where items are marked with bullet points.</li>
+  <li>Each item in the list should start with a <code class="highlighter-rouge">*</code> (asterisk) character.</li>
+  <li>Each item should also be on a new line.
+    <ul>
+      <li>Indent lines and begin them with <code class="highlighter-rouge">+</code> for sub-bullets.</li>
+      <li>Sub-sub-bullet aren’t really a thing in R Markdown.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="numbered-lists">Numbered lists</h3>
+
+<ol>
+  <li>Lines which begin with a numeral (0–9), followed by a period, will usually be interpreted as items in a numbered list.</li>
+  <li>R Markdown handles the numbering in what it renders automatically.</li>
+  <li>This can be handy when you lose count or don’t update the numbers yourself when editing.  (Look carefully at the .Rmd file for this item.)
+ a. Sub-lists of numbered lists, with letters for sub-items, are a thing.
+ b. They are however a fragile thing, which you’d better not push too hard.</li>
+</ol>
+
+<h3 id="title-author-date-output-format">Title, Author, Date, Output Format</h3>
+
+<p>You can specify things like title, author and date in the <strong>header</strong> of your
+R Markdown file.  This goes at the very beginning of the file, preceded
+and followed by lines containing three dashes.  Thus the beginning of
+this file looks like so:
+<code class="highlighter-rouge">
+---
+title: Using R Markdown for Class Reports
+author: CRS
+date: Last revised 15 August 2016
+---
+</code></p>
+
+<p>You can also use the header to tell R Markdown whether you want it to render to
+HTML (the default), PDF, or something else.  To have this turned into HTML,
+for instance, I’d write
+<code class="highlighter-rouge">
+---
+title: Using R Markdown for Class Reports
+author: CRS
+date: Last revised 15 August 2016
+output: pdf_document
+---
+</code></p>
+
+<ul>
+  <li>To create PDF, a program called <code class="highlighter-rouge">LaTeX</code> (see below) has to be installed
+on your computer.</li>
+  <li>Other output formats may be available.  See <code class="highlighter-rouge">help(render)</code> in the <code class="highlighter-rouge">rmarkdown</code>
+package.</li>
+  <li>There are many, many other formatting options which can be given in the
+header; see the main R Markdown help files online.</li>
+</ul>
+
+<h1 id="hyperlinks-and-images">Hyperlinks and Images</h1>
+
+<h3 id="hyperlinks">Hyperlinks</h3>
+
+<p>Hyperlinks anchored by URLs are easy: just type the URL, as, e.g.,
+http://www.math.uiuc.edu/~umaravat/ to get to my website</p>
+
+<p>Hyperlinks anchored to text have the <a href="http://www.math.uiuc.edu/~umaravat/">anchor in square brackets, then the link
+in parentheses</a>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[anchor in square brackets, then the link
+in parentheses](http://www.math.uiuc.edu/~umaravat/)
+</code></pre>
+</div>
+
+<h3 id="images">Images</h3>
+
+<p>Images begin with an exclamation mark, then the text to use if the
+image can’t be displayed, then either the file address of the image
+(in the same directory as your document) or a URL.  Here are two
+examples, one for an image in the directory and one for a URL.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+</code></pre>
+</div>
+
+<h1 id="including-code">Including Code</h1>
+
+<p>The real point of R Markdown is that it lets you include your code, have the
+code run automatically when your document is rendered, and seemlessly include
+the results of that code in your document.  The code comes in two varieties,
+code <strong>chunks</strong> and <strong>inline</strong> code.</p>
+
+<h3 id="code-chunks-and-their-results">Code Chunks and Their Results</h3>
+
+<p>A code <strong>chunk</strong> is simply an off-set piece of code by itself.  It is preceded
+by ` <code class="highlighter-rouge"><span class="p">{</span><span class="err">r</span><span class="p">}</span><span class="w"> </span><span class="err">`</span><span class="w"> </span><span class="err">on</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">line</span><span class="w"> </span><span class="err">by</span><span class="w"> </span><span class="err">itself,</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">ended</span><span class="w"> </span><span class="err">by</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">line</span><span class="w"> </span><span class="err">which</span><span class="w"> </span><span class="err">just</span><span class="w"> </span><span class="err">says</span><span class="w"> </span><span class="err">`</span></code> `.
+The code itself goes in between.  Here, for instance, is some code which
+loads a data set from a library, and makes a scatter plot.</p>
+
+<pre><code class="language-{r}">library(MASS)
+data(cats)
+plot(Hwt ~ Bwt, data=cats, xlab="Body weight (kg)", ylab="Heart weight (g)")
+</code></pre>
+
+<p>First, notice how the code is included, nicely formatted, in the document.
+Second, notice how the output of the code is also automatically included
+in the document.  If your code outputs numbers or text, those can be
+included too:</p>
+
+<pre><code class="language-{r}">with(cats, cor(Hwt, Bwt))
+</code></pre>
+
+<h3 id="inline-code">Inline Code</h3>
+
+<p>Code output can also be seamlessly incorporated into the text, using <strong>inline
+code</strong>.  This is code not set off on a line by itself, but beginning with
+` <code class="highlighter-rouge">r </code> and ending with ` ` <code class="highlighter-rouge">.  Using inline code is how this document
+knows that the </code>cats<code class="highlighter-rouge"> data set contains </code>r nrow(cats)<code class="highlighter-rouge"> rows, and that the
+median weight of the female cats' hearts was </code>r median(cats$Hwt[cats$Sex==”F”])`
+grams.</p>
+
+<p>Notice that inline code does <em>not</em> display the commands run, just their output. You can go to the <code class="highlighter-rouge">Rmd</code> <a href="ScribeTemplate.Rmd">source file</a> to see the command that was run to generate the number of rows and median weight.</p>
+
+<h3 id="seen-but-not-heard">Seen But Not Heard</h3>
+
+<p>Code chunks (but not inline code) can take a lot of <strong>options</strong> which modify
+how they are run, and how they appear in the document.  These options go after
+the initial <code class="highlighter-rouge">r</code> and before the closing <code class="highlighter-rouge">}</code> that announces the start of a code
+chunk.  One of the most common options turns off printing out the code,
+but leaves the results alone:
+ ` ```{r, echo=FALSE} `</p>
+
+<p>Another runs the code, but includes neither the text of the code nor its output.
+ ` ```{r, include=FALSE} `
+This might seem pointless, but it can be useful for code chunks which do set-up
+like loading data files, or initial model estimates, etc.</p>
+
+<p>Another option prints the code in the document, but does not run it:
+ ` ```{r, eval=FALSE} `
+This is useful if you want to talk about the (nicely formatted) code.</p>
+
+<h3 id="naming-chunks">Naming Chunks</h3>
+
+<p>You can give chunks names immediately after their opening, like
+` ```{r, clevername} `.  This name is then used for the images (or other files)
+that are generated when the document is rendered.</p>
+
+<h3 id="changing-image-sizes-and-alignments">Changing Image Sizes and Alignments</h3>
+
+<p>There are a bunch of options for adjusting the placement of the figures which
+R produces.  <code class="highlighter-rouge">fig.align</code> controls the horizontal <strong>alignment</strong> (left, right,
+or center).</p>
+
+<p>When producing PDF, the options <code class="highlighter-rouge">out.height</code> and <code class="highlighter-rouge">out.width</code> let you specify
+the desired height or width of the figure, in inches, centimeters, or multiples
+of pre-defined lengths (from <code class="highlighter-rouge">LaTeX</code>).  So for instance ` <code class="highlighter-rouge"><span class="p">{</span><span class="err">r,</span><span class="w">
+</span><span class="err">out.height=</span><span class="nt">"3in"</span><span class="err">}</span><span class="w"> </span><span class="err">`</span><span class="w"> </span><span class="err">forces</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">image</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="err">inches</span><span class="w"> </span><span class="err">high,</span><span class="w"> </span><span class="err">while</span><span class="w"> </span><span class="err">`</span></code>{r,
+out.width=”0.48\textwidth”} ` forces the image’s width to be a bit less than
+half of the total width of the text on the page (so that two such images will
+fit side by side).  The next few figures illustrate.</p>
+
+<p><code class="highlighter-rouge"><span class="p">{</span><span class="err">r,</span><span class="w"> </span><span class="err">echo=FALSE,</span><span class="w"> </span><span class="err">fig.width=3,</span><span class="w"> </span><span class="err">fig.align=</span><span class="nt">"center"</span><span class="err">}</span><span class="w">
+</span><span class="err">plot(Hwt</span><span class="w"> </span><span class="err">~</span><span class="w"> </span><span class="err">Bwt,</span><span class="w"> </span><span class="err">data=cats,</span><span class="w"> </span><span class="err">xlab=</span><span class="s2">"Body weight (kg)"</span><span class="err">,</span><span class="w">
+     </span><span class="err">ylab=</span><span class="s2">"Heart weight (g)"</span><span class="err">,</span><span class="w"> </span><span class="err">sub=</span><span class="s2">"Linear scale"</span><span class="err">)</span><span class="w">
+</span><span class="err">plot(Hwt</span><span class="w"> </span><span class="err">~</span><span class="w"> </span><span class="err">Bwt,</span><span class="w"> </span><span class="err">data=cats,</span><span class="w"> </span><span class="err">log=</span><span class="s2">"xy"</span><span class="err">,</span><span class="w"> </span><span class="err">xlab=</span><span class="s2">"Body weight (kg)"</span><span class="err">,</span><span class="w">
+     </span><span class="err">ylab=</span><span class="s2">"Heart weight (g)"</span><span class="err">,</span><span class="w"> </span><span class="err">sub=</span><span class="s2">"Logarithmic scale"</span><span class="err">)</span><span class="w">
+</span></code></p>
+
+<h3 id="tables">Tables</h3>
+
+<p>The default print-out of matrices, tables, etc. from R Markdown is frankly
+ugly.  The <code class="highlighter-rouge">knitr</code> package contains a very basic command, <code class="highlighter-rouge">kable</code>, which will
+format an array or data frame more nicely for display.</p>
+
+<p>Compare:</p>
+
+<pre><code class="language-{r}">coefficients(summary(lm(Hwt ~ Bwt, data=cats)))
+</code></pre>
+
+<p>with</p>
+
+<pre><code class="language-{r}">library(knitr) # Only need this the first time!
+kable(coefficients(summary(lm(Hwt ~ Bwt, data=cats))))
+</code></pre>
+
+<p>— Of course, R’s defaults print out a crazy number of decimal places, but
+this isn’t the time to discuss significant digits, or the <code class="highlighter-rouge">signif</code> function.</p>
+
+<h3 id="caching-code-chunks-re-running-only-when-changed">“Caching” Code Chunks (Re-Running Only When Changed)</h3>
+
+<p>By default, R Markdown will re-run all of your code every time you render your
+document.  If some of your code is slow, this can add up to a lot of time.  You
+can, however, ask R Markdown to keep track of whether a chunk of code has
+changed, and only re-run it if it has.  This is called <strong>caching</strong> the chunk.</p>
+
+<p><code class="highlighter-rouge"><span class="p">{</span><span class="err">r,</span><span class="w"> </span><span class="err">cache=TRUE</span><span class="p">}</span><span class="w">
+</span><span class="err">lm(Hwt</span><span class="w"> </span><span class="err">~</span><span class="w"> </span><span class="err">Bwt,</span><span class="w"> </span><span class="err">data=cats)</span><span class="w">
+</span></code></p>
+
+<p>One issue is that a chunk of code which hasn’t changed itself might call on
+results of earlier, modified chunks, and then we <em>would</em> want to re-run the
+downstream chunks.  There are options for manually telling R Markdown “this
+chunk depends on this earlier chunk”, but it’s generally easier to
+let it take care of that, by setting the <code class="highlighter-rouge">autodep=TRUE</code> option.</p>
+
+<ol>
+  <li>If you load a package with the <code class="highlighter-rouge">library()</code> or <code class="highlighter-rouge">require()</code> commands, R
+Markdown isn’t smart enough to check whether the package has changed
+(or indeed been installed, if you were missing it).  So that won’t
+trigger an automatic re-running of a cached code chunk.</li>
+  <li>To manually force re-running all code chunks, the easiest thing to do is
+to delete the directory R Markdown will create (named something like
+<em>filename</em><code class="highlighter-rouge">_cache</code>) which it uses to store the state of all code chunks.</li>
+</ol>
+
+<h3 id="setting-defaults-for-all-chunks">Setting Defaults for All Chunks</h3>
+
+<p>You can tell R to set some defaults to apply to all chunks where you don’t
+specifically over-ride them.  Here are the ones I generally use:</p>
+
+<p>```{r, eval=FALSE}
+# Need the knitr package to set chunk options
+library(knitr)</p>
+
+<h1 id="set-knitr-options-for-knitting-code-into-the-report">Set knitr options for knitting code into the report:</h1>
+<p># - Don’t print out code (echo)
+# - Save results so that code blocks aren’t re-run unless code changes (cache),
+# <em>or</em> a relevant earlier code block changed (autodep), but don’t re-run if the
+# only thing that changed was the comments (cache.comments)
+# - Don’t clutter R output with messages or warnings (message, warning)
+  # This <em>will</em> leave error messages showing up in the knitted report
+opts_chunk$set(echo=FALSE,
+               cache=TRUE, autodep=TRUE, cache.comments=FALSE,
+               message=FALSE, warning=FALSE)
+```</p>
+
+<p>This sets some additional options beyond the ones I’ve discussed, like not
+re-running a chunk if only the comments have changed (<code class="highlighter-rouge">cache.comments =
+FALSE</code>), and leaving out messages and warnings.  (I’d only recommend
+suppressing warnings once you’re sure your code is in good shape.)  I would
+typically give this set-up chunk itself the option <code class="highlighter-rouge">include=FALSE</code>.</p>
+
+<p>You can over-ride these defaults by setting options for individual chunks.</p>
+
+<h3 id="more-options">More Options</h3>
+
+<p>See [http://yihui.name/knitr/options/] for a complete listing of possible chunk options.</p>
+
+<h1 id="math-in-r-markdown">Math in R Markdown</h1>
+
+<p>Since this is a statistics class, you need to be able to write out mathematical
+expressions, often long series of them.  R Markdown gives you the syntax to
+render complex mathematical formulas and derivations, and have them displayed
+<em>very</em> nicely.  Like code, the math can either be inline or set off
+(<strong>displays</strong>).</p>
+
+<p>Inline math is marked off witha pair of dollar
+signs (<code class="highlighter-rouge">$</code>), as $\pi r^2$ or $e^{i\pi}$.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Inline math is marked off witha pair of dollar
+signs (`$`), as $\pi r^2$ or $e^{i\pi}$.
+</code></pre>
+</div>
+
+<p>Mathematical displays are marked off with <code class="highlighter-rouge">\[</code> and <code class="highlighter-rouge">\]</code>, as in
+[
+e^{i \pi} = -1
+]</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Mathematical displays are marked off with `\[` and `\]`, as in
+\[
+e^{i \pi} = -1
+\]
+</code></pre>
+</div>
+
+<p>Once your text has entered math mode, R Markdown turns over the job of
+converting your text into math to a different program, called LaTeX<sup id="fnref:latex"><a href="#fn:latex" class="footnote">1</a></sup>.
+This is the most common system for typesetting mathematical documents
+throughout the sciences, and has been for decades.  It is extremely powerful,
+stable, available on basically every computer, and completely free.  It is
+also, in its full power, pretty complicated.  Fortunately, the most useful
+bits, for our purposes, are actually rather straightforward.</p>
+
+<h3 id="elements-of-math-mode">Elements of Math Mode</h3>
+
+<ul>
+  <li>Most letters will be rendered in italics (compare: a vs. <code class="highlighter-rouge">a</code> vs. $a$; only
+the last is in math mode).  The spacing between letters also follows the conventions for math, so don’t treat it as just another way of getting italics.  (Compare <em>speed</em>, in simple italics, with $speed$, in math mode.)</li>
+  <li>Greek letters can be accessed with the slash in front of their names, as <code class="highlighter-rouge">\alpha</code> for $\alpha$.  Making the first letter upper case gives the upper-case letter, as in <code class="highlighter-rouge">\Gamma</code> for $\Gamma$ vs. <code class="highlighter-rouge">\gamma</code> for $\gamma$.  (Upper-case alpha and beta are the same as Roman A and B, so no special commands for them.)</li>
+  <li>There are other “slashed” (or “escaped”) commands for other mathematical symbols:
+    <ul>
+      <li><code class="highlighter-rouge">\times</code> for $\times$</li>
+      <li><code class="highlighter-rouge">\cdot</code> for $\cdot$</li>
+      <li><code class="highlighter-rouge">\leq</code> and <code class="highlighter-rouge">\geq</code> for $\leq$ and $\geq$</li>
+      <li><code class="highlighter-rouge">\subset</code> and <code class="highlighter-rouge">\subseteq</code> for $\subset$ and $\subseteq$</li>
+      <li><code class="highlighter-rouge">\leftarrow</code>, <code class="highlighter-rouge">\rightarrow</code>, <code class="highlighter-rouge">\Leftarrow</code>, <code class="highlighter-rouge">\Rightarrow</code> for $\leftarrow$, $\rightarrow$, $\Leftarrow$, $\Rightarrow$</li>
+      <li><code class="highlighter-rouge">\approx</code>, <code class="highlighter-rouge">\sim</code>, <code class="highlighter-rouge">\equiv</code> for $\approx$, $\sim$, $\equiv$</li>
+      <li>See, e.g., http://web.ift.uib.no/Teori/KURS/WRK/TeX/symALL.html for a fuller
+listing of available symbols.  (http://tug.ctan.org/info/symbols/comprehensive/symbols-a4.pdf lists <em>all</em> symbols available in <code class="highlighter-rouge">LaTeX</code>, including many non-mathematical special chracters)</li>
+    </ul>
+  </li>
+  <li>Subscripts go after an underscore character, <code class="highlighter-rouge">_</code>, and superscripts go after a caret, <code class="highlighter-rouge">^</code>, as <code class="highlighter-rouge">\beta_1</code> for $\beta_1$ or <code class="highlighter-rouge">a^2</code> for $a^2$.</li>
+  <li>Curly braces are used to create groupings that should be kept together, e.g., <code class="highlighter-rouge">a_{ij}</code> for $a_{ij}$ (vs. <code class="highlighter-rouge">a_ij</code> for $a_ij$).</li>
+  <li>If you need something set in ordinary (Roman) type within math mode, use <code class="highlighter-rouge">\mathrm</code>, as <code class="highlighter-rouge">t_{\mathrm{in}}^2</code> for $t_{\mathrm{in}}^2$.</li>
+  <li>If you’d like something set in an outline font (“blackboard bold”), use <code class="highlighter-rouge">\mathbb</code>, as <code class="highlighter-rouge">\mathbb{R}</code> for $\mathbb{R}$.</li>
+  <li>For bold face, use <code class="highlighter-rouge">\mathbf</code>, as
+<code class="highlighter-rouge">
+(\mathbf{x}^T\mathbf{x})^{-1}\mathbf{x}^T\mathbf{y}
+</code>
+for
+[
+(\mathbf{x}^T\mathbf{x})^{-1}\mathbf{x}^T\mathbf{y}
+]</li>
+  <li>Accents on characters work rather like changes of font: <code class="highlighter-rouge">\vec{a}</code> produces
+$\vec{a}$, <code class="highlighter-rouge">\hat{a}</code> produces $\hat{a}$.  Some accents, particularly hats,
+work better if they space out, as with <code class="highlighter-rouge">\widehat{\mathrm{Var}}</code> producing
+$\widehat{\mathrm{Var}}$.</li>
+  <li>Function names are typically written in romans, and spaced differently: thus
+$\log{x}$, not $log x$.  <code class="highlighter-rouge">LaTeX</code>, and therefore <code class="highlighter-rouge">R Markdown</code>, knows about a
+lot of such functions, and their names all begin with <code class="highlighter-rouge">\</code>.  For instance:
+<code class="highlighter-rouge">\log</code>, <code class="highlighter-rouge">\sin</code>, <code class="highlighter-rouge">\cos</code>, <code class="highlighter-rouge">\exp</code>, <code class="highlighter-rouge">\min</code>, etc.  Follow these function names
+with the argument in curly braces; this helps <code class="highlighter-rouge">LaTeX</code> figure out what exactly
+the argument is, and keep it grouped together with the function name when
+it’s laying out the text.  Thus <code class="highlighter-rouge">\log{(x+1)}</code> is better than <code class="highlighter-rouge">\log (x+1)</code>.</li>
+  <li>Fractions can be created with <code class="highlighter-rouge">\frac</code>, like so:
+<code class="highlighter-rouge">
+\frac{a+b}{b} = 1 + \frac{a}{b}
+</code>
+produces
+[
+\frac{a+b}{b} = 1 + \frac{a}{b}
+]</li>
+  <li>Sums can be written like so:
+<code class="highlighter-rouge">
+\sum_{i=1}^{n}{x_i^2}
+</code>
+will produce
+[
+\sum_{i=1}^{n}{x_i^2}
+]
+The lower and upper limits of summation after the <code class="highlighter-rouge">\sum</code> are both optional.
+Products and integrals work similarly, only with <code class="highlighter-rouge">\prod</code> and <code class="highlighter-rouge">\int</code>:
+[
+n! = \prod_{i=1}^{n}{i}
+]
+[
+\log{b} - \log{a} = \int_{x=a}^{x=b}{\frac{1}{x} dx}
+]
+<code class="highlighter-rouge">\sum</code>, <code class="highlighter-rouge">\prod</code> and <code class="highlighter-rouge">\int</code> all automatically adjust to the size of the expression being summed, producted or integrated.</li>
+  <li>“Delimiters”, like parentheses or braces, can automatically re-size to match what they’re surrounding.  To do this, you need to use <code class="highlighter-rouge">\left</code> and <code class="highlighter-rouge">\right</code>,
+as
+<code class="highlighter-rouge">
+\left( \sum_{i=1}^{n}{i} \right)^2 = \left( \frac{n(n-1)}{2}\right)^2 = \frac{n^2(n-1)^2}{4}
+</code>
+renders as
+[
+\left( \sum_{i=1}^{n}{i} \right)^2 = \left( \frac{n(n-1)}{2}\right)^2 = \frac{n^2(n-1)^2}{4}
+]
+    <ul>
+      <li>To use curly braces as delimiters, precede them with slashes, as <code class="highlighter-rouge">\{</code> and <code class="highlighter-rouge">\}</code> for ${$ and $}$.</li>
+    </ul>
+  </li>
+  <li>Multiple equations, with their equals signs lined up, can be created
+using <code class="highlighter-rouge">eqnarray</code>, as follows.
+<code class="highlighter-rouge">
+\[
+\begin{eqnarray}
+X &amp; \sim &amp; \mathrm{N}(0,1)\\
+Y &amp; \sim &amp; \chi^2_{n-p}\\
+R &amp; \equiv &amp; X/Y \sim t_{n-p}
+\end{eqnarray}
+\]
+</code></li>
+</ul>
+
+<p>[
+\begin{eqnarray}
+X &amp; \sim &amp; \mathrm{N}(0,1)<br />
+Y &amp; \sim &amp; \chi^2_{n-p}<br />
+R &amp; \equiv &amp; X/Y \sim t_{n-p}
+\end{eqnarray}
+]
+Notice that <code class="highlighter-rouge">&amp;</code> surrounds what goes in the middle on each line, and each line (except the last) is terminated with <code class="highlighter-rouge">\\</code>.  The left or right hand side of the equation can be blank, and space will be made:
+<code class="highlighter-rouge">
+\[
+\begin{eqnarray}
+P(|X-\mu| &gt; k) &amp; = &amp; P(|X-\mu|^2 &gt; k^2)\\
+&amp; \leq &amp; \frac{\mathbb{E}\left[|X-\mu|^2\right]}{k^2}\\
+&amp; \leq &amp; \frac{\mathrm{Var}[X]}{k^2}
+\end{eqnarray}
+\]
+</code></p>
+
+<p>[
+\begin{eqnarray}
+P(|X-\mu| &gt; k) &amp; = &amp; P(|X-\mu|^2 &gt; k^2)<br />
+&amp; \leq &amp; \frac{\mathbb{E}\left[|X-\mu|^2\right]}{k^2}<br />
+&amp; \leq &amp; \frac{\mathrm{Var}[X]}{k^2}
+\end{eqnarray}
+]</p>
+
+<p>(In full <code class="highlighter-rouge">LaTeX</code>, <code class="highlighter-rouge">\begin{eqnarray}</code> automatically enters math mode, but
+R Markdown needs the hint.)</p>
+
+<h3 id="translating-math-into-latex">Translating Math into <code class="highlighter-rouge">LaTeX</code></h3>
+
+<p><code class="highlighter-rouge">LaTeX</code> is designed so that every part of a mathematical expression has a
+reasonably straightforward counterpart in what you write.  Still, it can be a
+bit intimidating at first.  What many people find useful to to start by taking
+some page of printed or hand-written math and then deliberately translate that,
+line by line, into <code class="highlighter-rouge">LaTeX</code>, and then rendering it to see whether it came out
+right (and, if not, where to fix things).  If you need to do any math for an
+assignment, it can be a good idea to write the math out by hand, and then turn
+it into <code class="highlighter-rouge">LaTeX</code>, whether the class requires it (like this one) or not.
+Eventually, with practice, the translation will become quite automatic, and
+some people even do new math by writing out the <code class="highlighter-rouge">LaTeX</code>.</p>
+
+<h3 id="latex-does-not-check-correctness"><code class="highlighter-rouge">LaTeX</code> Does Not Check Correctness</h3>
+
+<p><code class="highlighter-rouge">LaTeX</code> does not check whether your math is <em>right</em>; it just checks whether
+it can figure out what you’re trying to say well enough to type-set it.
+Thus for instance it has no problem at all with the following:</p>
+
+<p>[
+\begin{eqnarray}
+(n+1)(n-1) &amp; = &amp; n^2<br />
+n^2 -1 &amp; = &amp; n^2<br />
+-1 &amp; = &amp; 0<br />
+1 &amp; = &amp; 0<br />
+-1 &amp; = &amp; 1
+\end{eqnarray}
+]</p>
+
+<p>(There <em>are</em> computer programs for doing symbolic mathematics which, in effect,
+do check whether your math is right, at least if you’re working in the sub-area
+of math they’re designed to handle.  So far as I know, no one has ever really
+combined them with <code class="highlighter-rouge">LaTeX</code>.)</p>
+
+<h3 id="more-advanced-math-mode-stuff-new-commands">More Advanced Math-Mode Stuff: New Commands</h3>
+
+<p>One of the things you can do in <code class="highlighter-rouge">LaTeX</code> is create your own commands.
+This is useful if you find yourself writing out the same complicated expression
+repeatedly, or, alternatively, if you want to make sure that the same
+symbol is always used for the same concept.  For instance, in some areas of
+statistics, the generic parameter of a model is $\theta$, in others $\beta$,
+in yet others $\psi$.  If you do something like this early on
+<code class="highlighter-rouge">
+\[
+\newcommand{\MyParameter}{\theta}
+\]
+</code>
+then in later bits of math mode you can write <code class="highlighter-rouge">\MyParameter</code>, and <code class="highlighter-rouge">LaTeX</code> will
+translate this to <code class="highlighter-rouge">\theta</code>.  If you later decide that you want your parameter
+to be <code class="highlighter-rouge">\beta</code>, or even <code class="highlighter-rouge">\mathrm{fred}</code>, you just change that initial definition
+of the new command, rather than having to track down each <code class="highlighter-rouge">\theta</code>.</p>
+
+<p>New commands can also take one or more arguments.  Here is a useful command
+for writing expectations:
+<code class="highlighter-rouge">
+\[
+\newcommand{\Expect}[1]{\mathbb{E}\left[ #1 \right]}
+\]
+</code>
+And here is a command for writing covariances:
+<code class="highlighter-rouge">
+\[
+\newcommand{\Cov}[2]{\mathrm{Cov}\left[ #1, #2\right]}
+\]
+</code></p>
+
+<p>Defining commands like this not only saves you typing, and makes it easier to
+make changes; it also makes your math-mode text easier for you, or others, to
+read even if it isn’t rendered.  This is like using comprehensible
+variable and function names in your programs, and for that matter like
+using functions rather than long strings of commands in the first place.</p>
+
+<p>It is also possible to define new function names which act like <code class="highlighter-rouge">\log</code>,
+new mathematical operators, draw diagrams, etc., etc., but that goes way
+beyond the scope of these notes.</p>
+
+<h3 id="installing-latex">Installing <code class="highlighter-rouge">LaTeX</code></h3>
+
+<p>If you render your R Markdown document to HTML, you do not need to install
+<code class="highlighter-rouge">LaTeX</code> on your computer.  This is because the HTML includes instructions to
+browsers, which say (as it were) “Send the funny-looking bits with all the
+slashes to <a href="http://www.mathjax.org">mathjax.org</a>, and it will send you back
+pretty pictures of equations”.  The website actually runs the <code class="highlighter-rouge">LaTeX</code>.</p>
+
+<p>If you want to produce PDF, you need to have <code class="highlighter-rouge">LaTeX</code> installed on your
+computer.  How you actually do this depends on the precise kind of computer.
+For Macs, I recommend using the <code class="highlighter-rouge">MacTeX</code> package, available from
+https://tug.org/mactex/mactex-download.html.  For other systems, follow the
+links from http://www.tug.org/begin.html.</p>
+
+<h1 id="putting-it-all-together-writing-your-report-in-r-markdown">Putting It All Together: Writing Your Report in R Markdown</h1>
+
+<ul>
+  <li>You have installed the <code class="highlighter-rouge">rmarkdown</code> package and all its dependencies.</li>
+  <li>You have installed <code class="highlighter-rouge">LaTeX</code>, if you’re producing a PDF.</li>
+  <li>You have installed and fired up your favorite text editor.</li>
+  <li>You open it up to a new document.
+    <ul>
+      <li>You give it a title, an author, and a date.</li>
+    </ul>
+  </li>
+  <li>You use headers to divide it into appropriate, titled sections, and possibly sub-sections.
+    <ul>
+      <li>One common pattern: “Introduction”, “Data and Research Questions”, “Analysis”, “Results”, “Conclusion”.</li>
+      <li>Another common pattern: “Problem 1”, “Problem 2”, … , “Extra Credit”.</li>
+    </ul>
+  </li>
+  <li>You write text.</li>
+  <li>When you need it, you insert math into the text, or even whole mathematical
+displays.</li>
+  <li>When you need it, you insert code into your document.
+    <ul>
+      <li>The code runs (as needed) when you render the document.</li>
+      <li>Figures, tables, and other output are automatically inserted into the document, and track changes in your code.</li>
+    </ul>
+  </li>
+  <li>Every so often, try to render your document.
+    <ul>
+      <li>When you (think you) have finished a section is a good time to do so.</li>
+      <li>Another good time is once you’ve made any non-trivial change to the code or the text.</li>
+    </ul>
+  </li>
+  <li>Either your document rendered successfully or it didn’t.
+    <ul>
+      <li>If it did, and you like the results, congratulate yourself and cheerfully go on to your next task.</li>
+      <li>If it rendered but you don’t like the results, think about why and try to fix it.</li>
+      <li>If it didn’t render, R will tell you where it gave up, so try to debug from around there.</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="troubleshootingstuff-to-avoid">Troubleshooting/Stuff to Avoid</h1>
+
+<ul>
+  <li>Do not call <code class="highlighter-rouge">View</code> or <code class="highlighter-rouge">help</code> in your document; these are interactive commands
+which don’t work well in scripts.</li>
+  <li>“It worked in the console but it wouldn’t knit”: You have almost certainly
+done something somewhat different <em>before</em> the code chunk that’s giving you
+trouble.  Clear your workspace in the console and re-run.
+    <ul>
+      <li>Avoid <code class="highlighter-rouge">attach</code> in both the console and in your file; using it is a recipe
+for creating hard-to-find errors.  You can still shorten expressions using
+<code class="highlighter-rouge">with</code> instead.</li>
+    </ul>
+  </li>
+  <li>You need LaTeX to create PDFs.  If you are having trouble doing so, try
+switching the output format to HTML.
+    <ul>
+      <li>LaTeX will complain if you try to print out truly enormous things.
+Errors about “out of stack”, or “pandoc 43”, are often caused by this.
+Don’t print out enormous things.  (Suppressing warnings and other
+messages may help.)</li>
+      <li>Do try to fix your LaTeX installation later, when you don’t have such time
+pressure; it’s really useful.</li>
+    </ul>
+  </li>
+  <li>When you need to load data files or source someone else’s code, use full
+URLs, rather than creating local copies and loading them from your disk.</li>
+</ul>
+
+<h1 id="further-reading">Further Reading</h1>
+
+<p>For more on R Markdown, see http://rmarkdown.rstudio.com, particularly the
+more detailed help pages (rather than the first-guides).</p>
+
+<p>For <code class="highlighter-rouge">LaTeX</code>, the classic reference is the book by Leslie Lamport, <em>LaTeX: A
+Document Preparation System</em> (2nd ed., Reading, Mass.: Addison-Wesley, 1994).
+This is not, admittedly, the easiest read in the world.
+<a href="https://en.wikibooks.org/wiki/LaTeX"><em>LaTeX</em></a>, from Wikibooks, is more
+accessible, and free online in easy bite-sized chunks.</p>
+
+<p>R Markdown is based on the <code class="highlighter-rouge">knitr</code> package, developed by Yihui Xie, for
+integrated R with <code class="highlighter-rouge">LaTeX</code>; see http://yihui.name/knitr/, and, for
+full documentation, Xie’s book <em>Dynamic Documents with R and knitr</em> (2nd
+edition, Boca Raton, Florida; CRC Press, 2015).</p>
+
+<p>For an thorough, entertaining, and completely correct explanation of why “The
+word processor is a stupid and grossly inefficient tool for preparing text for
+communication with others”, see http://ricardo.ecn.wfu.edu/~cottrell/wp.html.</p>
+
+<p>mark-up language, and a rendering program for that language, called <code class="highlighter-rouge">TeX</code>
+(pronounced “tech”), for writing complex mathematical documents.  In the 1980s,
+the computer scientist Leslie Lamport extended <code class="highlighter-rouge">TeX</code> in ways that made it
+rather more user-friendly, and called the result <code class="highlighter-rouge">LaTeX</code> (pronounced
+“la-tech”).</p>
+<div class="footnotes">
+  <ol>
+    <li id="fn:latex">
+      <p>In the 1970s, the great computer scientist Donald Knuth wrote a <a href="#fnref:latex" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+</article>
+
+        
+    </body>
+  </div>
+
+<footer>
+
+  <div class="jumbotron" style='margin-bottom: 0px;'>
+
+    <div class="footer">
+        <hr>
+        <p>&copy; 2016 Noah Salas. Powered by <a href="http://jekyllrb.com/">Jekyll</a> and theme based on <a href="http://bootswatch.com/paper/">Bootstrap</a>. Hosted by <a href="https://pages.github.com/">GitHub Pages</a></p>
+    </div>
+
+  </div>
+
+</footer>
+
+
+</html>

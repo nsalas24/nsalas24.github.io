@@ -1,0 +1,24 @@
+
+
+<div class="col-xs-12 col-sm-2">
+
+<h5 style="margin-bottom: 5px; margin-top: 23px; text-align: center;">Categories:</h5>
+
+	<ul class="list-group">
+	  {% for category in site.categories %}
+
+	  	{% if category[0] == page.category %} 
+
+	    	<div><a href="{{ site.baseurl }}/category/{{ category[0] }}" class="list-group-item active">{{ category[0] | capitalize }} <span> ({{ category[1].size }}) </span></a></div>
+
+	    {% else %}
+
+	    	<div><a href="{{ site.baseurl }}/category/{{ category[0] }}" class="list-group-item">{{ category[0] | capitalize }} <span> ({{ category[1].size }}) </span></a></div>
+
+	    {% endif %}
+
+	  {% endfor %}
+
+	</ul>
+
+</div>

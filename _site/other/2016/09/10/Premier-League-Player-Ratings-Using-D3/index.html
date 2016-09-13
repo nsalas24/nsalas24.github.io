@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Premier League Player Ratings Using D3</title>
+  <meta name="description" content="texty text text text">
+
+  <link rel="stylesheet" href="/css/paper.css">
+  <link rel="stylesheet" href="/css/helper2.css">
+  <link rel="canonical" href="http://nsalas24.github.io/other/2016/09/10/Premier-League-Player-Ratings-Using-D3/">
+  <link rel="alternate" type="application/rss+xml" title="Noah Salas" href="http://nsalas24.github.io/feed.xml">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <style type="text/css"></style>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+</head>
+
+  <header class="site-header">
+
+  <div class="wrapper">
+
+    <!----<a class="site-title" href="/">Noah Salas</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>-->
+
+
+    <div class="example3">
+	<nav class="navbar navbar-default navbar-static-top">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="/index/"><img src="/assets/mylogo2.PNG"></a>
+	    </div>
+
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+		
+		    
+		    	
+		      <li><a href="/about/">About</a></li>
+		    	
+		    
+		  
+		    
+		  
+		    
+		  
+		    
+		  
+		    
+		  
+		    
+		  
+		    
+		    	
+		      <li><a href="/projects/">Projects</a></li>
+		    	
+		    
+		  
+		    
+		    	
+		      <li><a href="/resources/">Resources</a></li>
+		    	
+		    
+		  
+		
+		  
+		  </ul>
+
+	      <ul class="nav navbar-nav navbar-right">
+			<li><a href="https://github.com/nsalas24"><span class="icon"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span></a>
+</li>
+			<li><a href="https://www.linkedin.com/in/noah-salas-73540670"><span class="icon"><?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="430.117px" height="430.117px" viewBox="0 0 430.117 430.117" style="enable-background:new 0 0 430.117 430.117;"
+	 xml:space="preserve">
+<g>
+	<path id="LinkedIn" d="M430.117,261.543V420.56h-92.188V272.193c0-37.271-13.334-62.707-46.703-62.707
+		c-25.473,0-40.632,17.142-47.301,33.724c-2.432,5.928-3.058,14.179-3.058,22.477V420.56h-92.219c0,0,1.242-251.285,0-277.32h92.21
+		v39.309c-0.187,0.294-0.43,0.611-0.606,0.896h0.606v-0.896c12.251-18.869,34.13-45.824,83.102-45.824
+		C384.633,136.724,430.117,176.361,430.117,261.543z M52.183,9.558C20.635,9.558,0,30.251,0,57.463
+		c0,26.619,20.038,47.94,50.959,47.94h0.616c32.159,0,52.159-21.317,52.159-47.94C103.128,30.251,83.734,9.558,52.183,9.558z
+		 M5.477,420.56h92.184v-277.32H5.477V420.56z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+</span></a></li>
+	      </ul>
+
+	    </div>
+
+
+
+	  </div>
+
+
+    </nav>
+    </div>
+
+  </div>
+
+</header>
+
+
+
+
+
+  <div style="font-size: 18px; max-width: 1300px; margin-left: auto; margin-right: auto; padding-left:2%; padding-right: 2%;">
+    <body>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Premier League Player Ratings Using D3</h1>
+    <p class="post-meta"><time datetime="2016-09-10T00:00:00-05:00" itemprop="datePublished">Sep 10, 2016</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Noah Salas</span></span></p>
+  </header>
+  <p class="post-update"> <i>Updated September 10, 2016</i></p>
+  <div class="post-content" itemprop="articleBody">
+    <style>
+
+#chart {
+  background: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: block;
+  margin: auto;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+text {
+  pointer-events: none;
+}
+
+.grandparent text {
+  font-weight: bold;
+}
+
+rect {
+  fill: none;
+  stroke: #fff;
+}
+
+rect.parent,
+.grandparent rect {
+  stroke-width: 2px;
+}
+
+rect.parent {
+    pointer-events: none;
+}
+
+.grandparent rect {
+  fill: orange;
+}
+
+.grandparent:hover rect {
+  fill: #ee9700;
+}
+
+.children rect.parent,
+.grandparent rect {
+  cursor: pointer;
+}
+
+.children rect.parent {
+  fill: #bbb;
+  fill-opacity: .1;
+}
+
+.children:hover rect.child {
+  fill: #bbb;
+}
+
+</style>
+
+<div id="chart"></div>
+
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+
+window.addEventListener('message', function(e) {
+    var opts = e.data.opts,
+        data = e.data.data;
+
+    return main(opts, data);
+});
+
+var defaults = {
+    margin: {top: 24, right: 0, bottom: 0, left: 0},
+    rootname: "TOP",
+    format: ",d",
+    title: "",
+    width: 1100,
+    height: 600
+};
+
+function main(o, data) {
+  var root,
+      opts = $.extend(true, {}, defaults, o),
+      formatNumber = d3.format(".2f"),
+      rname = opts.rootname,
+      margin = opts.margin,
+      theight = 36 + 16;
+
+  $('#chart').width(opts.width).height(opts.height);
+  var width = opts.width - margin.left - margin.right,
+      height = opts.height - margin.top - margin.bottom - theight,
+      transitioning;
+  
+  var color = d3.scale.ordinal().range(['#ff0000','#cc0000','#800000','#0000ff','#ff1a1a','#4747d1','#ff8000','#1a1aff','#ff1a1a','#99c2ff','#ff0000','#ff1a1a','#cc0000','#ff0000','#ff0000','#e0e0d1','#e0e0d1','#ffff00','#000080','#800000']).domain(["Arsenal","Bournemouth","Burnley","Chelsea","Crystal Palace","Everton","Hull City","Leicester","Liverpool","Manchester City","Manchester United","Middlesbrough","Southampton","Stoke City","Sunderland","Swansea City","Tottenham","Watford","West Bromwich Albion","West Ham"])
+  
+  var x = d3.scale.linear()
+      .domain([0, width])
+      .range([0, width]);
+  
+  var y = d3.scale.linear()
+      .domain([0, height])
+      .range([0, height]);
+  
+  var treemap = d3.layout.treemap()
+      .children(function(d, depth) { return depth ? null : d._children; })
+      .sort(function(a, b) { return a.value - b.value; })
+      .ratio(height / width * 0.5 * (1 + Math.sqrt(5)))
+      .round(false);
+  
+  var svg = d3.select("#chart").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.bottom + margin.top)
+      .style("margin-left", -margin.left + "px")
+      .style("margin.right", -margin.right + "px")
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+      .style("shape-rendering", "crispEdges");
+  
+  var grandparent = svg.append("g")
+      .attr("class", "grandparent");
+  
+  grandparent.append("rect")
+      .attr("y", -margin.top)
+      .attr("width", width)
+      .attr("height", margin.top);
+  
+  grandparent.append("text")
+      .attr("x", 6)
+      .attr("y", 6 - margin.top)
+      .attr("dy", ".75em");
+
+  if (opts.title) {
+    $("#chart").prepend("<p class='title'>" + opts.title + "</p>");
+  }
+  if (data instanceof Array) {
+    root = { key: rname, values: data };
+  } else {
+    root = data;
+  }
+    
+  initialize(root);
+  accumulate(root);
+  layout(root);
+  console.log(root);
+  display(root);
+
+  //if (window.parent !== window) {
+    //var myheight = document.documentElement.scrollHeight || document.body.scrollHeight;
+    //window.parent.postMessage({height: myheight}, '*');
+  //}
+
+  function initialize(root) {
+    root.x = root.y = 0;
+    root.dx = width;
+    root.dy = height;
+    root.depth = 0;
+  }
+
+  // Aggregate the values for internal nodes. This is normally done by the
+  // treemap layout, but not here because of our custom implementation.
+  // We also take a snapshot of the original children (_children) to avoid
+  // the children being overwritten when when layout is computed.
+  function accumulate(d) {
+    return (d._children = d.values)
+        ? d.value = d.values.reduce(function(p, v) { return p + accumulate(v); }, 0)
+        : d.value;
+  }
+
+  // Compute the treemap layout recursively such that each group of siblings
+  // uses the same size (1×1) rather than the dimensions of the parent cell.
+  // This optimizes the layout for the current zoom state. Note that a wrapper
+  // object is created for the parent node for each group of siblings so that
+  // the parent’s dimensions are not discarded as we recurse. Since each group
+  // of sibling was laid out in 1×1, we must rescale to fit using absolute
+  // coordinates. This lets us use a viewport to zoom.
+  function layout(d) {
+    if (d._children) {
+      treemap.nodes({_children: d._children});
+      d._children.forEach(function(c) {
+        c.x = d.x + c.x * d.dx;
+        c.y = d.y + c.y * d.dy;
+        c.dx *= d.dx;
+        c.dy *= d.dy;
+        c.parent = d;
+        layout(c);
+      });
+    }
+  }
+
+  function display(d) {
+    grandparent
+        .datum(d.parent)
+        .on("click", transition)
+      .select("text")
+        .text(name(d));
+
+    var g1 = svg.insert("g", ".grandparent")
+        .datum(d)
+        .attr("class", "depth");
+
+    var g = g1.selectAll("g")
+        .data(d._children)
+      .enter().append("g");
+
+    g.filter(function(d) { return d._children; })
+        .classed("children", true)
+        .on("click", transition);
+
+    var children = g.selectAll(".child")
+        .data(function(d) { return d._children || [d]; })
+      .enter().append("g");
+
+// This title element is what shows on hover e.g. Messi (8.1)
+// Used an if statement to change title for players ratings vs averages
+
+    children.append("rect")
+        .attr("class", "child")
+        .call(rect)
+      .append("title")
+        .text(function(d) { 
+			if (d.value <= 10.00) {return d.key + " (" + formatNumber(d.value) + ")";}
+            else { return d.key + " (" + formatNumber(d.value/d._children.length) + ")";}});
+			
+    children.append("text")
+        .attr("class", "ctext")
+        .text(function(d) { return d.key; })
+        .call(text2);
+
+    g.append("rect")
+        .attr("class", "parent")
+        .call(rect);
+
+    var t = g.append("text")
+        .attr("class", "ptext")
+        .attr("dy", ".75em")
+
+    t.append("tspan")
+        .text(function(d) { return d.key; });
+    t.append("tspan")
+        .attr("dy", "1.0em")
+        .text(function(d) {
+            if (d.value <= 10.00) {return formatNumber(d.value)}
+            else { return formatNumber(d.value/d._children.length)}});
+    t.call(text);
+
+    g.selectAll("rect")
+        .style("fill", function(d) { return color(d.team); });
+
+    function transition(d) {
+      if (transitioning || !d) return;
+      transitioning = true;
+
+      var g2 = display(d),
+          t1 = g1.transition().duration(750),
+          t2 = g2.transition().duration(750);
+
+      // Update the domain only after entering new elements.
+      x.domain([d.x, d.x + d.dx]);
+      y.domain([d.y, d.y + d.dy]);
+
+      // Enable anti-aliasing during the transition.
+      svg.style("shape-rendering", null);
+
+      // Draw child nodes on top of parent nodes.
+      svg.selectAll(".depth").sort(function(a, b) { return a.depth - b.depth; });
+
+      // Fade-in entering text.
+      g2.selectAll("text").style("fill-opacity", 0);
+
+      // Transition to the new view.
+      t1.selectAll(".ptext").call(text).style("fill-opacity", 0);
+      t1.selectAll(".ctext").call(text2).style("fill-opacity", 0);
+      t2.selectAll(".ptext").call(text).style("fill-opacity", 1);
+      t2.selectAll(".ctext").call(text2).style("fill-opacity", 1);
+      t1.selectAll("rect").call(rect);
+      t2.selectAll("rect").call(rect);
+
+      // Remove the old node when the transition is finished.
+      t1.remove().each("end", function() {
+        svg.style("shape-rendering", "crispEdges");
+        transitioning = false;
+      });
+    }
+
+    return g;
+  }
+
+  function text(text) {
+    text.selectAll("tspan")
+        .attr("x", function(d) { return x(d.x) + 6; })
+    text.attr("x", function(d) { return x(d.x) + 6; })
+        .attr("y", function(d) { return y(d.y) + 6; })
+        .style("opacity", function(d) { return this.getComputedTextLength() < x(d.x + d.dx) - x(d.x) ? 1 : 0; });
+  }
+
+  function text2(text) {
+    text.attr("x", function(d) { return x(d.x + d.dx) - this.getComputedTextLength() - 6; })
+        .attr("y", function(d) { return y(d.y + d.dy) - 6; })
+        .style("opacity", function(d) { return this.getComputedTextLength() + 100 < x(d.x + d.dx) - x(d.x) ? 1 : 0; });
+  }
+
+  function rect(rect) {
+    rect.attr("x", function(d) { return x(d.x); })
+        .attr("y", function(d) { return y(d.y); })
+        .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
+        .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); });
+  }
+
+  function name(d) {
+    return d.parent
+        ? name(d.parent) + " / " + d.key + " Average Rating (" + formatNumber(d.value/d._children.length) + ")"
+        : d.key + " Average Rating (" + formatNumber(d.value/(d._children.length*11)) + ")";
+  }
+}
+
+if (window.location.hash === "") {
+    d3.json("/assets/data.json", function(err, res) {
+        if (!err) {
+            console.log(res);
+            var data = d3.nest().key(function(d) { return d.team; }).entries(res);
+            main({title: "BPL's Most In-Form Teams and Players"}, {key: "BPL", values: data});
+        }
+    });
+}
+
+</script>
+
+<p><br /></p>
+
+<p>texty text text text</p>
+
+  </div>
+
+</article>
+
+        
+    </body>
+  </div>
+
+<footer>
+
+  <div class="jumbotron" style='margin-bottom: 0px;'>
+
+    <div class="footer">
+        <hr>
+        <p>&copy; 2016 Noah Salas. Powered by <a href="http://jekyllrb.com/">Jekyll</a> and theme based on <a href="http://bootswatch.com/paper/">Bootstrap</a>. Hosted by <a href="https://pages.github.com/">GitHub Pages</a></p>
+    </div>
+
+  </div>
+
+</footer>
+
+
+</html>

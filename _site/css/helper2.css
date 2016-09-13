@@ -1,0 +1,155 @@
+/* Navbar customization*/
+
+.navbar-nav > li > a {
+    padding-top: 30px;
+    padding-bottom:30px;
+    height: 90px;
+    font-size: 14px;
+}
+
+.navbar-brand {
+    padding-top: 0px;
+    padding-bottom:0px;
+    height: 90px;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: #eeeeee !important;
+}
+
+.nav.navbar-nav li a {
+    color: #444444;
+}
+
+.navbar-default .navbar-nav>.active>a {
+    color: #ffffff;
+    background-color: #2196f3;
+}
+
+/* Icons */
+
+.icon > svg {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle; }
+.icon > svg path {
+    fill: #444444; }
+
+/*.icon > svg:hover path:hover , .icon > svg:focus path:focus {
+    fill: #ffffff; }*/
+
+
+
+
+.navbar-brand {
+  height: 90px;
+}
+
+.navbar {
+  min-height: 90px !important;
+}
+
+.navbar-fixed-top .navbar-collapse,
+.navbar-fixed-bottom .navbar-collapse {
+  max-height: 410px;
+}
+
+/* General body */
+
+body {
+  color: #444444 !important;
+}
+
+
+/* Side bar customization */
+
+.list-group-item:hover {
+background-color: #eeeeee !important;
+color: #444444;;
+}
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+    z-index: 2;
+    color: #444444;
+    background-color: #eeeeee;
+    border-color: #eeeeee;
+}
+
+a.list-group-item, button.list-group-item {
+    color: #444444;
+}
+
+.list-group-item.active {
+    z-index: 2;
+    color: #ffffff;
+    background-color: #2196f3;
+    border-color: #2196f3;
+}
+
+/*.list-group {
+    position: absolute;
+    display: inline-block;
+    margin-left: -315px;
+    width: 200px;
+    height: 25px;
+    font-size: 14px;
+}*/
+
+.list-group {
+    margin:0 auto;
+    /*padding-top: 95px;*/
+    width: 150px;
+    height: 64px;
+    font-size: 14px;
+}
+
+.list-group-item {
+    height: 50%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+}
+
+/*Footer customization*/
+hr {
+    height: 0;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.footer {
+    padding-top: 0px;
+    padding-bottom: 5px;
+    margin-bottom: 0px;
+    background-color: #ffffff;
+}
+
+.footer p {
+    font-size: 12px;
+    color: #444444;
+    text-align: center;
+}
+
+.jumbotron {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    color: inherit;
+    height: 20px;
+    background-color: #ffffff;
+}
+
+footer {
+    padding-top: 50px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+
+.img-responsive {
+width: 425px;
+height:256px;
+}

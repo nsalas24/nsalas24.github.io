@@ -1,0 +1,24 @@
+---
+layout: default
+---
+
+<div class="row"> 
+{%include sidebar.html %}
+	<div class="col-xs-12 col-sm-8">
+		<h1 class="page-header" style="text-align: center; margin-top: 23px;">{{ page.category }}</h1>
+
+			<ul>
+			{% for post in site.categories[page.category] %}
+				    <h4>
+			          <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+			        </h4>
+			        <span class="text-warning">{{ post.date | date: "%b %-d, %Y" }}</span>
+			        <p>{{ post.content | strip_html | truncatewords:50}}</p>
+			        <a href="{{ post.url | prepend: site.baseurl }}">Read more...</a><br>
+			{% endfor %}
+			</ul>
+	</div>
+	<div class="col-xs-12 col-sm-2"></div>
+</div>
+
+

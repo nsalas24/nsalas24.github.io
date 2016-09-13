@@ -1,50 +1,34 @@
-<!DOCYTYPE html>
-<html> 
-	<head>
-		<link type="text/css" rel="stylesheet" href="hw1_stylesheet.css"/>
-		<title>Noah Salas: IE590-HW1</title>
-	</head>
-		
-	<body>
-		<table>
-			<thead>
-			<tr>
-                <th id="thead" colspan="2">IE590-HW1</th>
-			</tr>
-			<tr>
-				<th>Category</th>
-				<th id="bord">Response</th>
-			</tr>
-			</thead>
-			<tr class="rowcolor1">
-				<td id="left">Name</td>
-				<td id="bor"><a href="http://web.ics.purdue.edu/~salas/">Noah Salas</a></td>
-			</tr>
-			<tr class="rowcolor2">
-				<td id="left">Hometown</td>
-				<td id="bor">Indianapolis, IN</td>
-			<tr>
-			<tr class="rowcolor1">
-				<td id="left">Education</td>
-				<td id="bor">Senior in Industrial Engineering</td>
-			<tr class="rowcolor2">
-				<td id="left">Skill sets</td>
-				<td id="bor">HTML, CSS, SQL, SAS, Arena, and I'm learning JavaScript/jQuery now</td>		
-			</tr>
-			<tr class="rowcolor1">
-				<td id="left">Interests/Hobbies</td>
-				<td id="bor">
-					<ul>
-						<li>I plan on attending graduate school for applied statistics!</li>
-						<li>I love to play, watch, and referee soccer! I also work at the CoREC!</li>
-						<li>I'm currently attempting to publish <a href="http://www.purdue.edu/newsroom/releases/2014/Q3/purdue-team-advances-to-american-institute-of-aeronautics-and-astronautics-national-student-paper-conference.html">research</a> I have done the past few years!</li>
-					</ul>
-				</td>		
-			</tr>
+---
+layout: default
+---
 
+<div class="row">
+  {%include sidebar.html %}
+  
+  <div class="col-xs-12 col-sm-8">
+  <div class="home">
+    
+    
+    <h1 style="text-align: center; margin-top: 23px;">Welcome</h1>
+    <p>By some unlikely scenario you've stumbled across my personal portfolio/blog. I hope can find something useful here, and I'd love to learn something from you.
+    </p>
+    <hr>
+        <ul style="padding-left:0px;">
+          {% for post in site.posts %}
+              {% if post.categories.size != 0 %} 
+              <h4>
+                <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+              </h4>
+              <!--h6><a href="{{ site.baseurl | append: '/category/' }}" >{{ post.categories.size }}</a></h6-->
+              <span class="text-warning">{{ post.date | date: "%b %-d, %Y" }}</span>
+              <p>{{ post.content | strip_html | truncatewords:50}}</p>
+              <a href="{{ post.url | prepend: site.baseurl }}">Read more...</a><br>
+              {% endif %}
+          {% endfor %}
+        </ul>
 
+  </div>
+  </div>
 
-
-		</table>
-	</body>
-<html>
+  <div class="col-xs-12 col-sm-2">
+</div>
