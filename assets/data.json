@@ -1,332 +1,1102 @@
 [
     {
-        "key": "Laurent Koscielny,  D(C)",
+        "key": "Laurent Koscielny ",
         "team": "Arsenal",
         "value": 7.64
     },
     {
-        "key": "Calum Chambers,  D(CR)",
+        "key": "Calum Chambers ",
         "team": "Arsenal",
         "value": 7.63
     },
     {
-        "key": "Theo Walcott,  M(LR),FW",
+        "key": "Theo Walcott ",
         "team": "Arsenal",
         "value": 7.4
     },
     {
-        "key": "Alexis Sánchez,  M(LR),FW",
+        "key": "Alexis Sánchez ",
         "team": "Arsenal",
         "value": 7.31
     },
     {
-        "key": "Shkodran Mustafi,  D(CR)",
+        "key": "Shkodran Mustafi ",
         "team": "Arsenal",
         "value": 7.22
     },
     {
-        "key": "Héctor Bellerín,  D(R),M(R)",
+        "key": "Héctor Bellerín ",
         "team": "Arsenal",
         "value": 7.22
     },
     {
-        "key": "Santi Cazorla,  M(CLR)",
+        "key": "Santi Cazorla ",
         "team": "Arsenal",
         "value": 7.19
     },
     {
-        "key": "Francis Coquelin,  M(CL)",
+        "key": "Francis Coquelin ",
         "team": "Arsenal",
         "value": 7.15
     },
     {
-        "key": "Nacho Monreal,  D(CL)",
+        "key": "Nacho Monreal ",
         "team": "Arsenal",
         "value": 7.15
     },
     {
-        "key": "Mesut Özil,  M(CLR)",
+        "key": "Mesut Özil ",
         "team": "Arsenal",
         "value": 7.1
     },
     {
-        "key": "Alex Oxlade Chamberlain,  M(CLR)",
+        "key": "Alex Oxlade Chamberlain ",
         "team": "Arsenal",
         "value": 7.05
     },
     {
-        "key": "Adam Smith,  D(R)",
+        "key": "Adam Smith ",
         "team": "Bournemouth",
         "value": 7.19
     },
     {
-        "key": "Steve Cook,  D(C)",
+        "key": "Steve Cook ",
         "team": "Bournemouth",
         "value": 7.04
     },
     {
-        "key": "Simon Francis,  D(CR)",
+        "key": "Simon Francis ",
         "team": "Bournemouth",
         "value": 6.99
     },
     {
-        "key": "Joshua King,  AM(CLR),FW",
+        "key": "Joshua King ",
         "team": "Bournemouth",
         "value": 6.98
     },
     {
-        "key": "Charlie Daniels,  D(L)",
+        "key": "Charlie Daniels ",
         "team": "Bournemouth",
         "value": 6.88
     },
     {
-        "key": "Artur Boruc,  GK",
+        "key": "Artur Boruc ",
         "team": "Bournemouth",
         "value": 6.85
     },
     {
-        "key": "Junior Stanislas,  AM(LR)",
+        "key": "Junior Stanislas ",
         "team": "Bournemouth",
         "value": 6.73
     },
     {
-        "key": "Andrew Surman,  M(CL)",
+        "key": "Andrew Surman ",
         "team": "Bournemouth",
         "value": 6.7
     },
     {
-        "key": "Harry Arter,  M(C)",
+        "key": "Harry Arter ",
         "team": "Bournemouth",
         "value": 6.66
     },
     {
-        "key": "Jordon Ibe,  AM(LR)",
+        "key": "Jordon Ibe ",
         "team": "Bournemouth",
         "value": 6.65
     },
     {
-        "key": "Max Gradel,  M(LR)",
+        "key": "Max Gradel ",
         "team": "Bournemouth",
         "value": 6.59
     },
     {
-        "key": "Steven Defour,  DMC",
+        "key": "Steven Defour ",
         "team": "Burnley",
         "value": 7.56
     },
     {
-        "key": "Ben Mee,  D(CL)",
+        "key": "Ben Mee ",
         "team": "Burnley",
         "value": 7.09
     },
     {
-        "key": "Tom Heaton,  GK",
+        "key": "Tom Heaton ",
         "team": "Burnley",
         "value": 7.08
     },
     {
-        "key": "Matthew Lowton,  D(LR),M(R)",
+        "key": "Matthew Lowton ",
         "team": "Burnley",
         "value": 7.01
     },
     {
-        "key": "Sam Vokes,  FW",
+        "key": "Sam Vokes ",
         "team": "Burnley",
         "value": 6.89
     },
     {
-        "key": "Stephen Ward,  D(L)",
+        "key": "Stephen Ward ",
         "team": "Burnley",
         "value": 6.84
     },
     {
-        "key": "George Boyd,  M(LR)",
+        "key": "George Boyd ",
         "team": "Burnley",
         "value": 6.78
     },
     {
-        "key": "Michael Keane,  D(CR)",
+        "key": "Michael Keane ",
         "team": "Burnley",
         "value": 6.65
     },
     {
-        "key": "Dean Marney,  M(C)",
+        "key": "Dean Marney ",
         "team": "Burnley",
         "value": 6.62
     },
     {
-        "key": "Andre Gray,  FW",
+        "key": "Andre Gray ",
         "team": "Burnley",
         "value": 6.58
     },
     {
-        "key": "Scott Arfield,  AM(CLR)",
+        "key": "Scott Arfield ",
         "team": "Burnley",
         "value": 6.54
     },
     {
-        "key": "Eden Hazard,  M(CLR)",
+        "key": "Eden Hazard ",
         "team": "Chelsea",
         "value": 7.9
     },
     {
-        "key": "Diego Costa,  FW",
+        "key": "Diego Costa ",
         "team": "Chelsea",
         "value": 7.67
     },
     {
-        "key": "Willian,  AM(CLR)",
+        "key": "Willian ",
         "team": "Chelsea",
         "value": 7.62
     },
     {
-        "key": "Branislav Ivanovic,  D(CR)",
+        "key": "Branislav Ivanovic ",
         "team": "Chelsea",
         "value": 7.01
     },
     {
-        "key": "Oscar,  AM(CLR)",
+        "key": "Oscar ",
         "team": "Chelsea",
         "value": 6.99
     },
     {
-        "key": "Cesc Fàbregas,  M(CL),FW",
+        "key": "Cesc Fàbregas ",
         "team": "Chelsea",
         "value": 6.98
     },
     {
-        "key": "N'Golo Kanté,  DMC",
+        "key": "N'Golo Kanté ",
         "team": "Chelsea",
         "value": 6.94
     },
     {
-        "key": "César Azpilicueta,  D(LR)",
+        "key": "César Azpilicueta ",
         "team": "Chelsea",
         "value": 6.89
     },
     {
-        "key": "Nemanja Matic,  DMC",
+        "key": "Nemanja Matic ",
         "team": "Chelsea",
         "value": 6.82
     },
     {
-        "key": "Gary Cahill,  D(C)",
+        "key": "Gary Cahill ",
         "team": "Chelsea",
         "value": 6.74
     },
     {
-        "key": "Pedro,  AM(LR)",
+        "key": "Pedro ",
         "team": "Chelsea",
         "value": 6.63
     },
     {
-        "key": "Sadio Mané,  AM(CLR)",
+        "key": "Jason Puncheon ",
+        "team": "Crystal Palace",
+        "value": 7.62
+    },
+    {
+        "key": "Scott Dann ",
+        "team": "Crystal Palace",
+        "value": 7.51
+    },
+    {
+        "key": "Andros Townsend ",
+        "team": "Crystal Palace",
+        "value": 7.48
+    },
+    {
+        "key": "Christian Benteke ",
+        "team": "Crystal Palace",
+        "value": 7.46
+    },
+    {
+        "key": "Mile Jedinak ",
+        "team": "Crystal Palace",
+        "value": 7.2
+    },
+    {
+        "key": "Wilfried Zaha ",
+        "team": "Crystal Palace",
+        "value": 7.19
+    },
+    {
+        "key": "Steve Mandanda ",
+        "team": "Crystal Palace",
+        "value": 6.99
+    },
+    {
+        "key": "Damien Delaney ",
+        "team": "Crystal Palace",
+        "value": 6.85
+    },
+    {
+        "key": "Joel Ward ",
+        "team": "Crystal Palace",
+        "value": 6.81
+    },
+    {
+        "key": "James McArthur ",
+        "team": "Crystal Palace",
+        "value": 6.79
+    },
+    {
+        "key": "Joe Ledley ",
+        "team": "Crystal Palace",
+        "value": 6.79
+    },
+    {
+        "key": "Romelu Lukaku ",
+        "team": "Everton",
+        "value": 7.99
+    },
+    {
+        "key": "Idrissa Gueye ",
+        "team": "Everton",
+        "value": 7.76
+    },
+    {
+        "key": "Seamus Coleman ",
+        "team": "Everton",
+        "value": 7.67
+    },
+    {
+        "key": "Gareth Barry ",
+        "team": "Everton",
+        "value": 7.53
+    },
+    {
+        "key": "Yannick Bolasie ",
+        "team": "Everton",
+        "value": 7.5
+    },
+    {
+        "key": "Phil Jagielka ",
+        "team": "Everton",
+        "value": 7.38
+    },
+    {
+        "key": "Mason Holgate ",
+        "team": "Everton",
+        "value": 7.37
+    },
+    {
+        "key": "Ashley Williams ",
+        "team": "Everton",
+        "value": 7.27
+    },
+    {
+        "key": "Kevin Mirallas ",
+        "team": "Everton",
+        "value": 7.23
+    },
+    {
+        "key": "Leighton Baines ",
+        "team": "Everton",
+        "value": 7.1
+    },
+    {
+        "key": "Maarten Stekelenburg ",
+        "team": "Everton",
+        "value": 7.03
+    },
+    {
+        "key": "Curtis Davies ",
+        "team": "Hull",
+        "value": 8.49
+    },
+    {
+        "key": "Robert Snodgrass ",
+        "team": "Hull",
+        "value": 7.5
+    },
+    {
+        "key": "Andrew Robertson ",
+        "team": "Hull",
+        "value": 7.15
+    },
+    {
+        "key": "Sam Clucas ",
+        "team": "Hull",
+        "value": 7.05
+    },
+    {
+        "key": "Jake Livermore ",
+        "team": "Hull",
+        "value": 7.04
+    },
+    {
+        "key": "Ahmed Elmohamady ",
+        "team": "Hull",
+        "value": 7.01
+    },
+    {
+        "key": "Shaun Maloney ",
+        "team": "Hull",
+        "value": 6.96
+    },
+    {
+        "key": "Eldin Jakupovic ",
+        "team": "Hull",
+        "value": 6.89
+    },
+    {
+        "key": "David Meyler ",
+        "team": "Hull",
+        "value": 6.87
+    },
+    {
+        "key": "Adama Diomande ",
+        "team": "Hull",
+        "value": 6.82
+    },
+    {
+        "key": "Abel Hernández ",
+        "team": "Hull",
+        "value": 6.59
+    },
+    {
+        "key": "Daniel Drinkwater ",
+        "team": "Leicester",
+        "value": 7.02
+    },
+    {
+        "key": "Christian Fuchs ",
+        "team": "Leicester",
+        "value": 6.92
+    },
+    {
+        "key": "Riyad Mahrez ",
+        "team": "Leicester",
+        "value": 6.89
+    },
+    {
+        "key": "Jamie Vardy ",
+        "team": "Leicester",
+        "value": 6.85
+    },
+    {
+        "key": "Danny Simpson ",
+        "team": "Leicester",
+        "value": 6.83
+    },
+    {
+        "key": "Wes Morgan ",
+        "team": "Leicester",
+        "value": 6.7
+    },
+    {
+        "key": "Marc Albrighton ",
+        "team": "Leicester",
+        "value": 6.67
+    },
+    {
+        "key": "Shinji Okazaki ",
+        "team": "Leicester",
+        "value": 6.67
+    },
+    {
+        "key": "Kasper Schmeichel ",
+        "team": "Leicester",
+        "value": 6.62
+    },
+    {
+        "key": "Robert Huth ",
+        "team": "Leicester",
+        "value": 6.47
+    },
+    {
+        "key": "Andy King ",
+        "team": "Leicester",
+        "value": 6.44
+    },
+    {
+        "key": "Sadio Mané ",
         "team": "Liverpool",
         "value": 8.14
     },
     {
-        "key": "Roberto Firmino,  M(CLR),FW",
+        "key": "Roberto Firmino ",
         "team": "Liverpool",
         "value": 7.63
     },
     {
-        "key": "Adam Lallana,  AM(CLR)",
+        "key": "Adam Lallana ",
         "team": "Liverpool",
         "value": 7.35
     },
     {
-        "key": "Philippe Coutinho,  M(CLR)",
+        "key": "Philippe Coutinho ",
         "team": "Liverpool",
         "value": 7.17
     },
     {
-        "key": "James Milner,  M(CLR)",
+        "key": "James Milner ",
         "team": "Liverpool",
         "value": 7.14
     },
     {
-        "key": "Joel Matip,  D(C)",
+        "key": "Joel Matip ",
         "team": "Liverpool",
         "value": 7.05
     },
     {
-        "key": "Jordan Henderson,  M(CLR)",
+        "key": "Jordan Henderson ",
         "team": "Liverpool",
         "value": 6.94
     },
     {
-        "key": "Georginio Wijnaldum,  M(CL)",
+        "key": "Georginio Wijnaldum ",
         "team": "Liverpool",
         "value": 6.88
     },
     {
-        "key": "Daniel Sturridge,  M(R),FW",
+        "key": "Daniel Sturridge ",
         "team": "Liverpool",
         "value": 6.78
     },
     {
-        "key": "Dejan Lovren,  D(C)",
+        "key": "Dejan Lovren ",
         "team": "Liverpool",
         "value": 6.75
     },
     {
-        "key": "Ragnar Klavan,  D(C)",
+        "key": "Ragnar Klavan ",
         "team": "Liverpool",
         "value": 6.75
     },
     {
-        "key": "Arthur Masuaku,  D(L),M(L)",
+        "key": "Paul Pogba ",
+        "team": "Manchester United",
+        "value": 7.83
+    },
+    {
+        "key": "Marouane Fellaini ",
+        "team": "Manchester United",
+        "value": 7.65
+    },
+    {
+        "key": "Zlatan Ibrahimovic ",
+        "team": "Manchester United",
+        "value": 7.58
+    },
+    {
+        "key": "Daley Blind ",
+        "team": "Manchester United",
+        "value": 7.47
+    },
+    {
+        "key": "Antonio Valencia ",
+        "team": "Manchester United",
+        "value": 7.37
+    },
+    {
+        "key": "Wayne Rooney ",
+        "team": "Manchester United",
+        "value": 7.3
+    },
+    {
+        "key": "Eric Bailly ",
+        "team": "Manchester United",
+        "value": 7.24
+    },
+    {
+        "key": "Juan Mata ",
+        "team": "Manchester United",
+        "value": 7.21
+    },
+    {
+        "key": "Luke Shaw ",
+        "team": "Manchester United",
+        "value": 7.02
+    },
+    {
+        "key": "David de Gea ",
+        "team": "Manchester United",
+        "value": 6.85
+    },
+    {
+        "key": "Marcus Rashford ",
+        "team": "Manchester United",
+        "value": 6.67
+    },
+    {
+        "key": "Daniel Ayala ",
+        "team": "Middlesbrough",
+        "value": 7.45
+    },
+    {
+        "key": "Cristhian Stuani ",
+        "team": "Middlesbrough",
+        "value": 7.44
+    },
+    {
+        "key": "George Friend ",
+        "team": "Middlesbrough",
+        "value": 7.27
+    },
+    {
+        "key": "Álvaro Negredo ",
+        "team": "Middlesbrough",
+        "value": 7.13
+    },
+    {
+        "key": "Antonio Barragán ",
+        "team": "Middlesbrough",
+        "value": 7.12
+    },
+    {
+        "key": "Gastón Ramírez ",
+        "team": "Middlesbrough",
+        "value": 6.98
+    },
+    {
+        "key": "Stewart Downing ",
+        "team": "Middlesbrough",
+        "value": 6.94
+    },
+    {
+        "key": "Adam Forshaw ",
+        "team": "Middlesbrough",
+        "value": 6.91
+    },
+    {
+        "key": "Nsue ",
+        "team": "Middlesbrough",
+        "value": 6.83
+    },
+    {
+        "key": "Ben Gibson ",
+        "team": "Middlesbrough",
+        "value": 6.81
+    },
+    {
+        "key": "Adam Clayton ",
+        "team": "Middlesbrough",
+        "value": 6.77
+    },
+    {
+        "key": "Nathan Redmond ",
+        "team": "Southampton",
+        "value": 7.05
+    },
+    {
+        "key": "Maya Yoshida ",
+        "team": "Southampton",
+        "value": 7.03
+    },
+    {
+        "key": "Oriol Romeu ",
+        "team": "Southampton",
+        "value": 7.02
+    },
+    {
+        "key": "Matt Targett ",
+        "team": "Southampton",
+        "value": 6.92
+    },
+    {
+        "key": "Virgil van Dijk ",
+        "team": "Southampton",
+        "value": 6.9
+    },
+    {
+        "key": "Dusan Tadic ",
+        "team": "Southampton",
+        "value": 6.84
+    },
+    {
+        "key": "Ryan Bertrand ",
+        "team": "Southampton",
+        "value": 6.76
+    },
+    {
+        "key": "Cédric Soares ",
+        "team": "Southampton",
+        "value": 6.75
+    },
+    {
+        "key": "Pierre-Emile Højbjerg ",
+        "team": "Southampton",
+        "value": 6.74
+    },
+    {
+        "key": "Jay Rodriguez ",
+        "team": "Southampton",
+        "value": 6.48
+    },
+    {
+        "key": "Steven Davis ",
+        "team": "Southampton",
+        "value": 6.39
+    },
+    {
+        "key": "Xherdan Shaqiri ",
+        "team": "Stoke",
+        "value": 7.5
+    },
+    {
+        "key": "Peter Crouch ",
+        "team": "Stoke",
+        "value": 7.27
+    },
+    {
+        "key": "Bruno Martins Indi ",
+        "team": "Stoke",
+        "value": 7.2
+    },
+    {
+        "key": "Geoff Cameron ",
+        "team": "Stoke",
+        "value": 7.04
+    },
+    {
+        "key": "Joe Allen ",
+        "team": "Stoke",
+        "value": 6.86
+    },
+    {
+        "key": "Philipp Wollscheid ",
+        "team": "Stoke",
+        "value": 6.69
+    },
+    {
+        "key": "Ryan Shawcross ",
+        "team": "Stoke",
+        "value": 6.69
+    },
+    {
+        "key": "Shay Given ",
+        "team": "Stoke",
+        "value": 6.66
+    },
+    {
+        "key": "Mame Biram Diouf ",
+        "team": "Stoke",
+        "value": 6.57
+    },
+    {
+        "key": "Erik Pieters ",
+        "team": "Stoke",
+        "value": 6.52
+    },
+    {
+        "key": "Glenn Whelan ",
+        "team": "Stoke",
+        "value": 6.51
+    },
+    {
+        "key": "Papy Djilobodji ",
+        "team": "Sunderland",
+        "value": 7.35
+    },
+    {
+        "key": "Younes Kaboul ",
+        "team": "Sunderland",
+        "value": 7.16
+    },
+    {
+        "key": "Patrick van Aanholt ",
+        "team": "Sunderland",
+        "value": 6.91
+    },
+    {
+        "key": "Jordan Pickford ",
+        "team": "Sunderland",
+        "value": 6.88
+    },
+    {
+        "key": "Adnan Januzaj ",
+        "team": "Sunderland",
+        "value": 6.83
+    },
+    {
+        "key": "Donald Love ",
+        "team": "Sunderland",
+        "value": 6.73
+    },
+    {
+        "key": "Jack Rodwell ",
+        "team": "Sunderland",
+        "value": 6.64
+    },
+    {
+        "key": "Lamine Koné ",
+        "team": "Sunderland",
+        "value": 6.63
+    },
+    {
+        "key": "Jermain Defoe ",
+        "team": "Sunderland",
+        "value": 6.59
+    },
+    {
+        "key": "Lynden Gooch ",
+        "team": "Sunderland",
+        "value": 6.59
+    },
+    {
+        "key": "Steven Pienaar ",
+        "team": "Sunderland",
+        "value": 6.57
+    },
+    {
+        "key": "Leroy Fer ",
+        "team": "Swansea",
+        "value": 7.69
+    },
+    {
+        "key": "Kyle Naughton ",
+        "team": "Swansea",
+        "value": 7.37
+    },
+    {
+        "key": "Lukasz Fabianski ",
+        "team": "Swansea",
+        "value": 7.29
+    },
+    {
+        "key": "Jack Cork ",
+        "team": "Swansea",
+        "value": 7.07
+    },
+    {
+        "key": "Jefferson Montero ",
+        "team": "Swansea",
+        "value": 6.9
+    },
+    {
+        "key": "Federico Fernández ",
+        "team": "Swansea",
+        "value": 6.85
+    },
+    {
+        "key": "Jordi Amat ",
+        "team": "Swansea",
+        "value": 6.81
+    },
+    {
+        "key": "Gylfi Sigurdsson ",
+        "team": "Swansea",
+        "value": 6.79
+    },
+    {
+        "key": "Modou Barrow ",
+        "team": "Swansea",
+        "value": 6.77
+    },
+    {
+        "key": "Fernando Llorente ",
+        "team": "Swansea",
+        "value": 6.75
+    },
+    {
+        "key": "Stephen Kingsley ",
+        "team": "Swansea",
+        "value": 6.7
+    },
+    {
+        "key": "Son Heung-Min ",
+        "team": "Tottenham",
+        "value": 9.26
+    },
+    {
+        "key": "Ben Davies ",
+        "team": "Tottenham",
+        "value": 8.3
+    },
+    {
+        "key": "Danny Rose ",
+        "team": "Tottenham",
+        "value": 7.51
+    },
+    {
+        "key": "Kyle Walker ",
+        "team": "Tottenham",
+        "value": 7.42
+    },
+    {
+        "key": "Erik Lamela ",
+        "team": "Tottenham",
+        "value": 7.32
+    },
+    {
+        "key": "Jan Vertonghen ",
+        "team": "Tottenham",
+        "value": 7.22
+    },
+    {
+        "key": "Christian Eriksen ",
+        "team": "Tottenham",
+        "value": 7.19
+    },
+    {
+        "key": "Victor Wanyama ",
+        "team": "Tottenham",
+        "value": 7.11
+    },
+    {
+        "key": "Toby Alderweireld ",
+        "team": "Tottenham",
+        "value": 7.05
+    },
+    {
+        "key": "Hugo Lloris ",
+        "team": "Tottenham",
+        "value": 6.99
+    },
+    {
+        "key": "Dele Alli ",
+        "team": "Tottenham",
+        "value": 6.93
+    },
+    {
+        "key": "Etienne Capoue ",
+        "team": "Watford",
+        "value": 7.89
+    },
+    {
+        "key": "Roberto Pereyra ",
+        "team": "Watford",
+        "value": 7.56
+    },
+    {
+        "key": "Odion Ighalo ",
+        "team": "Watford",
+        "value": 6.96
+    },
+    {
+        "key": "Troy Deeney ",
+        "team": "Watford",
+        "value": 6.95
+    },
+    {
+        "key": "José Holebas ",
+        "team": "Watford",
+        "value": 6.9
+    },
+    {
+        "key": "Heurelho Gomes ",
+        "team": "Watford",
+        "value": 6.9
+    },
+    {
+        "key": "Miguel Britos ",
+        "team": "Watford",
+        "value": 6.89
+    },
+    {
+        "key": "Adlène Guédioura ",
+        "team": "Watford",
+        "value": 6.7
+    },
+    {
+        "key": "Daryl Janmaat ",
+        "team": "Watford",
+        "value": 6.59
+    },
+    {
+        "key": "Craig Cathcart ",
+        "team": "Watford",
+        "value": 6.58
+    },
+    {
+        "key": "Isaac Success ",
+        "team": "Watford",
+        "value": 6.55
+    },
+    {
+        "key": "Gareth McAuley ",
+        "team": "West Bromwich Albion",
+        "value": 7.24
+    },
+    {
+        "key": "Brendan Galloway ",
+        "team": "West Bromwich Albion",
+        "value": 7.16
+    },
+    {
+        "key": "Claudio Yacob ",
+        "team": "West Bromwich Albion",
+        "value": 7.1
+    },
+    {
+        "key": "Jonny Evans ",
+        "team": "West Bromwich Albion",
+        "value": 7.05
+    },
+    {
+        "key": "Ben Foster ",
+        "team": "West Bromwich Albion",
+        "value": 7.04
+    },
+    {
+        "key": "James McClean ",
+        "team": "West Bromwich Albion",
+        "value": 6.93
+    },
+    {
+        "key": "Craig Dawson ",
+        "team": "West Bromwich Albion",
+        "value": 6.92
+    },
+    {
+        "key": "Jonas Olsson ",
+        "team": "West Bromwich Albion",
+        "value": 6.92
+    },
+    {
+        "key": "Matt Phillips ",
+        "team": "West Bromwich Albion",
+        "value": 6.78
+    },
+    {
+        "key": "Darren Fletcher ",
+        "team": "West Bromwich Albion",
+        "value": 6.61
+    },
+    {
+        "key": "Craig Gardner ",
+        "team": "West Bromwich Albion",
+        "value": 6.52
+    },
+    {
+        "key": "Arthur Masuaku ",
         "team": "West Ham",
         "value": 7.47
     },
     {
-        "key": "Michail Antonio,  D(R),M(CLR),FW",
+        "key": "Michail Antonio ",
         "team": "West Ham",
         "value": 7.39
     },
     {
-        "key": "Dimitri Payet,  M(CLR)",
+        "key": "Dimitri Payet ",
         "team": "West Ham",
         "value": 7.22
     },
     {
-        "key": "Andy Carroll,  FW",
+        "key": "Andy Carroll ",
         "team": "West Ham",
         "value": 7.19
     },
     {
-        "key": "James Collins,  D(C)",
+        "key": "James Collins ",
         "team": "West Ham",
         "value": 7.04
     },
     {
-        "key": "Cheikhou Kouyaté,  D(C),DMC",
+        "key": "Cheikhou Kouyaté ",
         "team": "West Ham",
         "value": 7.04
     },
     {
-        "key": "Sam Byram,  D(R),M(R)",
+        "key": "Sam Byram ",
         "team": "West Ham",
         "value": 6.97
     },
     {
-        "key": "Winston Reid,  D(C)",
+        "key": "Winston Reid ",
         "team": "West Ham",
         "value": 6.94
     },
     {
-        "key": "Håvard Nordtveit,  D(CR),DMC",
+        "key": "Håvard Nordtveit ",
         "team": "West Ham",
         "value": 6.77
     },
     {
-        "key": "Simone Zaza,  FW",
+        "key": "Simone Zaza ",
         "team": "West Ham",
         "value": 6.69
     },
     {
-        "key": "Adrián,  GK",
+        "key": "Adrián ",
         "team": "West Ham",
         "value": 6.68
+    },
+    {
+        "key": "Nicolás Otamendi ",
+        "team": "Manchester City",
+        "value": 7.9
+    },
+    {
+        "key": "Kevin De Bruyne ",
+        "team": "Manchester City",
+        "value": 7.74
+    },
+    {
+        "key": "Fernandinho ",
+        "team": "Manchester City",
+        "value": 7.62
+    },
+    {
+        "key": "Raheem Sterling ",
+        "team": "Manchester City",
+        "value": 7.53
+    },
+    {
+        "key": "Sergio Agüero ",
+        "team": "Manchester City",
+        "value": 7.41
+    },
+    {
+        "key": "David Silva ",
+        "team": "Manchester City",
+        "value": 7.38
+    },
+    {
+        "key": "Aleksandar Kolarov ",
+        "team": "Manchester City",
+        "value": 7.2
+    },
+    {
+        "key": "Nolito ",
+        "team": "Manchester City",
+        "value": 7.16
+    },
+    {
+        "key": "Gaël Clichy ",
+        "team": "Manchester City",
+        "value": 7.09
+    },
+    {
+        "key": "John Stones ",
+        "team": "Manchester City",
+        "value": 6.84
+    },
+    {
+        "key": "Kelechi Iheanacho ",
+        "team": "Manchester City",
+        "value": 6.8
     }
 ]
