@@ -105,7 +105,7 @@ function main(o, data) {
       height = opts.height - margin.top - margin.bottom - theight,
       transitioning;
   
-  var color = d3.scale.ordinal().range(['#ff0000','#cc0000','#800000','#0000ff','#ff1a1a','#4747d1','#ff8000','#1a1aff','#ff1a1a','#99c2ff','#ff0000','#ff1a1a','#cc0000','#ff0000','#ff0000','#e0e0d1','#e0e0d1','#ffff00','#000080','#800000']).domain(["Arsenal","Bournemouth","Burnley","Chelsea","Crystal Palace","Everton","Hull City","Leicester","Liverpool","Manchester City","Manchester United","Middlesbrough","Southampton","Stoke City","Sunderland","Swansea City","Tottenham","Watford","West Bromwich Albion","West Ham"])
+  var color = d3.scale.ordinal().range(['#ff0000','#cc0000','#800000','#0000ff','#ff1a1a','#0000ff','#ff8000','#1a1aff','#ff1a1a','#99c2ff','#ff0000','#ff1a1a','#cc0000','#ff0000','#ff0000','#e0e0d1','#e0e0d1','#ffff00','#000080','#800000']).domain(["Arsenal","Bournemouth","Burnley","Chelsea","Crystal Palace","Everton","Hull","Leicester","Liverpool","Manchester City","Manchester United","Middlesbrough","Southampton","Stoke","Sunderland","Swansea","Tottenham","Watford","West Bromwich Albion","West Ham"])
   
   var x = d3.scale.linear()
       .domain([0, width])
