@@ -11,7 +11,8 @@ even be of use to you.
 Some facts about me:
 
 * I'm originally from Indianapolis. How I would program my days if possible:
-		
+
+{% highlight python %}
 ```
 IF NOT tired AND NOT ill AND NOT sad:
 	Eat banana pancakes
@@ -20,10 +21,11 @@ IF NOT tired AND NOT ill AND NOT sad:
 	Model data AND write code
 	Watch soccer OR play soccer
 	Cook dinner #probably not well
-	ELSE:
+ELSE:
 	Sleep
-	ENDIF
+ENDIF
 ```	
+{% endhighlight %}
 * I'm currently finishing up my Master's degree in Statistics at the University of Illinois (Champaign-Urbana). In my former life I was an Industrial Engineer.
 * So far I've held statistical roles in the insurance and pharmaceutical industries. My true aim is to leverage my analytic abilites to further social good.
 * I'm most familiar with machine learning techniques, model implementation, as well as experimental design and analysis. I also have experience in applied optimization methods, data visualization, and front-end web design.
