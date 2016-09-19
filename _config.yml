@@ -17,6 +17,10 @@ github_username: nsalas24
 linkedin: https://www.linkedin.com/in/noah-salas-73540670
 
 # Build settings
-markdown: kramdown
 permalink: pretty
-highlighter: pygments
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+
