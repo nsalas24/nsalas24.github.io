@@ -12,11 +12,11 @@ permalink: /resources/
 #### Visualization
 
 * I took a class focused exclusively on data visualization where we used [D3](https://d3js.org/). For additional resources, check out [Scott Murray's awesome online book](http://chimera.labs.oreilly.com/books/1230000000345/index.html).
-* There's several good tutorials for R [Shiny](http://shiny.rstudio.com/) but I think [Zev Ross' introduction](http://zevross.com/blog/2016/04/19/r-powered-web-applications-with-shiny-a-tutorial-and-cheat-sheet-with-40-example-apps/) takes the cake.
+* There's several good tutorials for [Shiny](http://shiny.rstudio.com/) but I think [Zev Ross' introduction](http://zevross.com/blog/2016/04/19/r-powered-web-applications-with-shiny-a-tutorial-and-cheat-sheet-with-40-example-apps/) takes the cake.
 
 #### Machine Learning
 
-* In my opinion, the best book written on machine learning is [The Elements of Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/). Did mention it's free?
+* In my opinion, the best book written on machine learning is [The Elements of Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/). Did I mention its free?
 * [Machine Learning Mastery](http://machinelearningmastery.com/blog/) offers clear, easy to read articles on different algorithms and how to implement them.
 
 #### Blogs/sites/publications I enjoy
