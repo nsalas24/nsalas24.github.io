@@ -12,7 +12,7 @@ Some facts about me:
 
 * I'm originally from Indianapolis. How I would program my days if possible:
 
-```r
+{% highlight r %}
 if ((tired == FALSE) & (ill == FALSE) & (sad == FALSE)) {
    Eat banana pancakes
    Go saltwater fishing
@@ -23,7 +23,7 @@ if ((tired == FALSE) & (ill == FALSE) & (sad == FALSE)) {
 } else {
    Sleep
 }
-```
+{% endhighlight %}
 
 {% highlight ruby %}
 def show
