@@ -19,8 +19,9 @@ linkedin: https://www.linkedin.com/in/noah-salas-73540670
 # Build settings
 permalink: pretty
 markdown: kramdown
+highlighter: rouge
 kramdown:
   input: GFM
-  syntax_highlighter: rouge
+  hard_wrap: false
 
 
