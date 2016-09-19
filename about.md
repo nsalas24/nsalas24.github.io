@@ -12,7 +12,7 @@ Some facts about me:
 
 * I'm originally from Indianapolis. How I would program my days if possible:
 
-{% highlight r %}
+```r
 if ((tired == FALSE) & (ill == FALSE) & (sad == FALSE)) {
    Eat banana pancakes
    Go saltwater fishing
@@ -23,15 +23,14 @@ if ((tired == FALSE) & (ill == FALSE) & (sad == FALSE)) {
 } else {
    Sleep
 }
-{% endhighlight %}
-
+```
 ```python
 if tired == False and ill == False and sad == False:
    Eat banana pancakes
    Go saltwater fishing
    Take a nap
-   Model data & write code
-   Watch soccer || play soccer
+   Model data and write code
+   Watch soccer or play soccer
    Cook dinner #probably not well
 else:
    Sleep
