@@ -19,4 +19,4 @@ linkedin: https://www.linkedin.com/in/noah-salas-73540670
 # Build settings
 markdown: kramdown
 permalink: pretty
-highlighter: rouge
+highlighter: pygments
