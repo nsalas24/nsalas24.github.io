@@ -4,6 +4,10 @@ title: Resources
 permalink: /resources/
 ---
 
+##### Front end web design
+
+##### Visualization
+
 
 <h5 class="text-primary">Front end design</h5>
 <ul>
@@ -33,7 +37,7 @@ permalink: /resources/
   <li>one</li>
 </ul>
 
-<h5 class="text-primary">Useful magazines/publications</h5>
+<h5 class="text-primary">Publications I enjoy</h5>
 <ul>
   <li>one</li>
   <li>one</li>  
