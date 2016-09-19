@@ -17,8 +17,8 @@ if ((tired == FALSE) & (ill == FALSE) & (sad == FALSE)) {
    Eat banana pancakes
    Go saltwater fishing
    Take a nap
-   Model data and write code
-   Watch soccer or play soccer
+   Model data & write code
+   Watch soccer || play soccer
    Cook dinner #probably not well
 } else {
    Sleep
