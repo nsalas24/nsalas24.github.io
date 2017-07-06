@@ -42,6 +42,7 @@ server file [here](link%20to%20code%20files):
 
 Most of these steps live in the *calculation* event:
 
+{% highlight r %}
     #Performs the calculations on action of the input$calc button
     #Returns total_n and paid_off
       calculation <- eventReactive(input$calc, {
@@ -97,11 +98,13 @@ Most of these steps live in the *calculation* event:
           return(results)
         }
         }) #end of calculation function
+{% endhighlight %}
 
 I used some functions to help with my calculations: get the number of
 periods it took to payoff a loan, the accural amount, and an effective
 interest rate.
 
+{% highlight r %}
         nper <- function(rate,pmt,pv,fv=0,typ=0){
           result = log10(pmt/(pmt -pv*(rate)))/log10(1+rate)
           return(result)
@@ -115,6 +118,7 @@ interest rate.
         eff_int <- function(rate,period){
           (1+rate/period)^(period/12)-1
         }
+{% endhighlight %}
 
 This is similar to an
 [avalanche](http://www.investopedia.com/terms/d/debt-avalanche.asp)
