@@ -1,3 +1,11 @@
+---
+layout: post
+title: "Student Loan Calculator"
+author: "Noah Salas"
+date: "July 5, 2017"
+categories: Other
+---
+
 As I was finishing up school, I wanted a quick and dirty way to
 calculate how long it might take me to pay off my student loans and at
 what cost. So I did what I always do and googled it. But as I did so, I
