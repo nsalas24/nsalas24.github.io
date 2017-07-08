@@ -27,7 +27,7 @@ accrued and the number of months that it will take you to pay off these
 loans.
 
 These are calculated in the following way, and this can be found in the
-server file [here](link%20to%20code%20files):
+server file [here](https://github.com/nsalas24/nsalas24.github.io/blob/master/assets/server.R):
 
 1.  Pay off any existing interest balance. Great Lakes told me all of
     your intial payments will go towards this amount until it is paid

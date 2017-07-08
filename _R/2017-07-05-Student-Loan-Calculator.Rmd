@@ -11,7 +11,7 @@ As I was finishing up school, I wanted a quick and dirty way to calculate how lo
 
 To use [this app](https://nsalas24.shinyapps.io/student_loan_calculator/), all you have to do is enter an interest balance (or leave at zero) and enter your loans into the table. From there select what monthly payment you would like, and the app outputs two important things: the total interest accrued and the number of months that it will take you to pay off these loans.
 
-These are calculated in the following way, and this can be found in the server file [here](link to code files):
+These are calculated in the following way, and this can be found in the server file [here](https://github.com/nsalas24/nsalas24.github.io/blob/master/assets/server.R):
 
 1. Pay off any existing interest balance. Great Lakes told me all of your intial payments will go towards this amount until it is paid off.
 2. Calculate which loan will accrue the most interest in the next month. The majority of the time this will be the loan with the highest interest rate. Proceed to pay off this loan, calculating the number of months it took and total accrued interest.
