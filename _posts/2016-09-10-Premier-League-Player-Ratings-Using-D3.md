@@ -4,7 +4,7 @@ title: "Premier League Player Ratings Using D3"
 subtitle: 'Updated September 10, 2016'
 author: "Noah Salas"
 date: "September 10, 2016"
-categories: Other
+categories: D3
 ---
 
 <style>

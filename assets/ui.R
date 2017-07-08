@@ -7,8 +7,8 @@ shinyUI(fluidPage(
   p("If you haven't figured out by now, the bar to your left is where you can set all of your input parameters. To add loans, simply enter the name, interest, and principal amount of the loan then click" 
     ,strong("'Add Row'"), "and your loan table will updated automatically. You can also delete loans (rows) anytime. After setting what monthly payment you'd like, click the " ,strong("'Calculate!'"), "button and check out your results. " ,em("p.s. I don't store
     any results, so if you're worried about that, don't be :)") ),
-  p("I wrote a blog post detailing the methods I use to generate these results, found" ,a("here", href="http://nsalas24.github.io/shiny/2017/07/05/Student-Loan-Calculator/"),
-    "The source code for this shiny app lives" ,a("here", href="https://github.com/nsalas24/nsalas24.github.io/tree/master/assets"), ", good luck!"),
+  p("I wrote a blog post detailing the methods I use to generate these results, found",a("here.", href="http://nsalas24.github.io/shiny/2017/07/05/Student-Loan-Calculator/"),
+    "The source code for this shiny app lives",a("here", href="https://github.com/nsalas24/nsalas24.github.io/tree/master/assets"),", good luck!"),
   
   sidebarLayout(
     sidebarPanel(
