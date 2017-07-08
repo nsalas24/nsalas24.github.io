@@ -4,6 +4,7 @@ title: "Student Loan Calculator"
 author: "Noah Salas"
 date: "July 5, 2017"
 categories: Shiny
+comments: true
 ---
 
 As I was finishing up school, I wanted a quick and dirty way to
