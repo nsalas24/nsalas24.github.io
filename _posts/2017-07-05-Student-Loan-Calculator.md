@@ -138,4 +138,8 @@ opposed to spreading it out across all your loans). If you wanted to get
 really fancy, you could recalculate which loan you should pay off based
 on the next month's interest accural *every month*.
 
+Resources I used:
+- [How to update tables reactively in Shiny](https://stackoverflow.com/questions/23236944/add-values-to-a-reactive-table-in-shiny)
+- My Shiny app is hosted on [shinyapps.io](http://www.shinyapps.io/), so this [post](https://shiny.rstudio.com/articles/shinyapps.html) helped me learn how to deploy my app there!
+
 Good luck and enjoy!

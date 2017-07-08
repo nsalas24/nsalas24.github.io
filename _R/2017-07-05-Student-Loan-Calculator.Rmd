@@ -3,7 +3,7 @@ layout: post
 title: "Student Loan Calculator"
 author: "Noah Salas"
 date: "July 5, 2017"
-categories: Other
+categories: Shiny
 output: md_document
 ---
 
@@ -102,5 +102,9 @@ Notice I used some functions to help with my calculations: get the number of per
 ```
 
 This is similar to an [avalanche](http://www.investopedia.com/terms/d/debt-avalanche.asp) style repayment strategy and you should be able to actually implement this in real life. ([Great Lakes](https://www.mygreatlakes.org/)) lets you specify which loan you want your payment to be applied to (as opposed to spreading it out across all your loans). If you wanted to get really fancy, you could recalculate which loan you should pay off based on the next month's interest accural *every month*. 
+
+Resources I used:
+- [How to update tables reactively in Shiny](https://stackoverflow.com/questions/23236944/add-values-to-a-reactive-table-in-shiny)
+- My Shiny app is hosted on [shinyapps.io](http://www.shinyapps.io/), so this [post](https://shiny.rstudio.com/articles/shinyapps.html) helped me learn how to deploy my app there!
 
 Good luck and enjoy!
