@@ -314,7 +314,7 @@ with Matching.
     }
 {% endhighlight %}
 
-![](2017-07-25-An-Intro-To-Observational-Studies_files/figure-markdown_strict/unnamed-chunk-5-1.png)![](2017-07-25-An-Intro-To-Observational-Studies_files/figure-markdown_strict/unnamed-chunk-5-2.png)![](2017-07-25-An-Intro-To-Observational-Studies_files/figure-markdown_strict/unnamed-chunk-5-3.png)
+![](/assets/2017-07-25-An-Intro-To-Observational-Studies_files/figure-markdown_strict/unnamed-chunk-5-1.png)![](/assets/2017-07-25-An-Intro-To-Observational-Studies_files/figure-markdown_strict/unnamed-chunk-5-2.png)![](/assets/2017-07-25-An-Intro-To-Observational-Studies_files/figure-markdown_strict/unnamed-chunk-5-3.png)
 
 Now let's do a more technical Matching. I will match on the following
 covariates:
