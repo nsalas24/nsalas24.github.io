@@ -27,17 +27,15 @@ dimensional problem. Some common ones are:
 
 -   <u>Exact</u>: only match individuals that have the same exact
     covariate values (useful if binary).
--   <u>[Propensity
-    score](https://en.wikipedia.org/wiki/Propensity_score_matching)</u>:
+-   [Propensity score](https://en.wikipedia.org/wiki/Propensity_score_matching):
     absolute or linear difference in propensity scores, which is the
     conditional probabilty of an individual being a treatment given its
     covariates.
 -   <u>Euclidean</u>: sum of the normalized distanced for each
     covariate.
--   <u>[Mahalanobis](https://en.wikipedia.org/wiki/Mahalanobis_distance)</u>:
+-   [Mahalanobis](https://en.wikipedia.org/wiki/Mahalanobis_distance):
     euclidean distance adjusting for covariance in the data.
--   <u>[Generalized
-    Mahalanobis](http://sekhon.berkeley.edu/papers/GenMatch.pdf)</u>: a
+-   [Generalized Mahalanobis](http://sekhon.berkeley.edu/papers/GenMatch.pdf): a
     generalized version of the Mahalanobis distance to weight covariates
     by their importance to producing balance.
 
@@ -281,7 +279,7 @@ you guess where *los clasicos* are ;)?
     legend(x="topleft", legend=c("Real Madrid", "Tottenham"), pch=c(2,1), col=c("black", "blue"))
 {% endhighlight %}
 
-![](assets/2017-07-25-An-Intro-To-Observational-Studies_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+![](/assets/2017-07-25-An-Intro-To-Observational-Studies_files/figure-markdown_strict/unnamed-chunk-4-1.png)
 
 If we do a quick and dirty Matching and tighten our caliper, you can see
 that the distribtuions begin to overlap more. However we throw out more
