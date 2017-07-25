@@ -281,7 +281,7 @@ you guess where *los clasicos* are ;)?
     legend(x="topleft", legend=c("Real Madrid", "Tottenham"), pch=c(2,1), col=c("black", "blue"))
 {% endhighlight %}
 
-![](2017-07-25-An-Intro-To-Observational-Studies_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+![](assets/2017-07-25-An-Intro-To-Observational-Studies_files/figure-markdown_strict/unnamed-chunk-4-1.png)
 
 If we do a quick and dirty Matching and tighten our caliper, you can see
 that the distribtuions begin to overlap more. However we throw out more
