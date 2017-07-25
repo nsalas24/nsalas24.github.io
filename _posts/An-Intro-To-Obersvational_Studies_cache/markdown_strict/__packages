@@ -1,0 +1,11 @@
+base
+DBI
+RSQLite
+dplyr
+XML
+lubridate
+data.table
+car
+MASS
+Matching
+bindrcpp
